@@ -157,13 +157,15 @@
 
 @section('javascript')
 <script>
-function edit(id){
-  $.get('/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' ,function(data){
-    $("#exampleModalLabel").html('Edit Task');
-    $("#page").html(data);
-    $("#exampleModal").modal('show');
-  });
-}
+  @if(isset($taskGroup))
+    function edit(id){
+      $.get('/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' ,function(data){
+        $("#exampleModalLabel").html('Edit Task');
+        $("#page").html(data);
+        $("#exampleModal").modal('show');
+      });
+    }
+  @endif
 function editMD(id){
   $.get('/my_day/' + id + '/edit' ,function(data){
     $("#exampleModalLabel").html('Edit Task');

@@ -35,6 +35,7 @@ class TaskController extends Controller
             'name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
+            'reminder' => 'nullable|date',
         ]);
     
         $taskGroup->tasks()->create($validatedData);
@@ -75,6 +76,7 @@ class TaskController extends Controller
     public function update(TaskRequest $request, TaskGroup $taskGroup,Task $task)
     {
         $task->update($request->validated());
+        // dd($task);
         return redirect()->back();
     }
 

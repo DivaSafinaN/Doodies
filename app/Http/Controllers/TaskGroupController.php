@@ -37,7 +37,10 @@ class TaskGroupController extends Controller
      */
     public function store(TaskGroupRequest $request)
     {
-        TaskGroup::create($request->validated());
+        $validatedData = $request->validated();
+        $validatedData['user_id'] = auth()->user()->id;
+
+        TaskGroup::create($validatedData);
         return redirect('my_day');
     }
     /**

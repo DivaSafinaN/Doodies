@@ -16,8 +16,14 @@ class MyDayController extends Controller
      */
     public function index($sort=null)
     {
-        $myDay = MyDay::where('completed', false)->get();
-        $taskGroups = TaskGroup::all();
+        $user_id = auth()->user()->id;
+
+        $myDay = MyDay::where('completed', false)
+                      ->where('user_id', $user_id)
+                      ->get();
+        
+        $taskGroups = TaskGroup::where('user_id', $user_id)
+                               ->get();
 
         return view('my_day.index', compact('myDay','taskGroups'));
     }
@@ -46,6 +52,7 @@ class MyDayController extends Controller
             'due_date' => 'nullable|date',
         ]);
     
+        $validatedData['user_id'] = auth()->user()->id;
         MyDay::create($validatedData);
     
         return redirect()->route('my_day.index');

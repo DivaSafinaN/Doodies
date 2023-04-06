@@ -2,11 +2,18 @@
 @section('title', 'My Day')
 @section('css')
 <style>
+  .table tbody td .group-id{
+    text-decoration: none;
+    color: black;
+  }
+  .table tbody td .group-id:hover{
+    text-decoration: underline;
+  }
 </style>
 @endsection
 @section('content')
 <div class="container-fluid">
-    <span class="text">Hi, Diva</span>
+  <span class="text">Hi, {{ Auth::user()->name }}</span>
 </div>
 <div class="container-fluid mt-3">
   <div class="col-md-10">
@@ -112,7 +119,10 @@
                     </td>
                     <td style="width: 68%">
                       <span>{{ $t->name }}</span> <br>
-                      <span style="font-size: 12px"><i>{{ $taskGroup->name }}</i></span>
+                      <span style="font-size: 12px">
+                        <i><a href="{{ route('task_groups.edit',$taskGroup->id) }}" class="group-id">
+                        {{ $taskGroup->name }}</a></i>
+                      </span>
                     </td>
                     <td style="text-align: end; width: 30px">
                       @if($t->notes)
@@ -216,8 +226,11 @@
 </div>
 
 @endsection
+{{-- '{{ route("task_groups.tasks.edit", ["task_group" => $taskGroup->id, "task" => $id]) }}'
+/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' --}}
 @section('javascript')
 <script>
+  @if(isset($taskGroup))
     function edit(id){
     $.get('/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' ,function(data){
       $("#exampleModalLabel").html('Edit Task');
@@ -225,6 +238,7 @@
       $("#exampleModal").modal('show');
     });
   }
+  @endif
   function editMD(id){
   $.get('/my_day/' + id + '/edit' ,function(data){
     $("#exampleModalLabel").html('Edit Task');

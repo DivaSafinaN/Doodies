@@ -27,7 +27,8 @@ class TaskRequest extends FormRequest
             'name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
-            'priority_id' => 'required'
+            'priority_id' => 'required',
+            'reminder' => 'nullable|date'
         ];
     }
 }

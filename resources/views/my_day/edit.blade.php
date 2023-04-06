@@ -22,8 +22,12 @@
           
         <div class="form-group mb-1 mt-3">
             <label for="due_date" class="form-label">Add Due Date</label>
-            <input type="datetime-local" class="form-control" name="due_date" id="due_date" 
-            value="{{ \Carbon\Carbon::parse($myDay->due_date)->format('Y-m-d\TH:i') }}">
+            @if($myDay->due_date)
+            <input type="date" class="form-control" name="due_date" id="due_date" 
+            value="{{ \Carbon\Carbon::parse($myDay->due_date)->format('Y-m-d') }}">
+            @else
+            <input type="date" class="form-control" name="due_date" id="due_date" >
+            @endif
         </div>
     
         <div class="mb-1 mt-3">

@@ -22,8 +22,14 @@ class TaskAdditionals extends Controller
     }
 
     public function comtask(){
-        $taskGroups = TaskGroup::all();
-        $myDayTasks = MyDay::where('completed', true)->get();
+        $user_id = auth()->user()->id;
+
+        $myDayTasks = MyDay::where('completed', true)
+                    ->where('user_id', $user_id)
+                    ->get();
+
+        $taskGroups = TaskGroup::where('user_id', $user_id)
+                            ->get();
 
         return view('additionals.completed', compact('myDayTasks','taskGroups'));
     }

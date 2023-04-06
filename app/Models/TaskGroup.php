@@ -10,10 +10,14 @@ class TaskGroup extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['user_id','name'];
 
     public function tasks(){
         return $this->hasMany(Task::class);
+    }
+
+    public function users(){
+        return $this->belongsTo(User::class);
     }
 
 }

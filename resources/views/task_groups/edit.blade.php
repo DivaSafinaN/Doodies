@@ -2,6 +2,13 @@
 @section('title',  $taskGroup->name )
 @section('css')
 <style>
+  .table tbody td .my-day-link{
+    text-decoration: none;
+    color: black;
+  }
+  .table tbody td .my-day-link:hover{
+    text-decoration: underline;
+  }
 </style>
 @endsection
 @section('content')
@@ -14,7 +21,7 @@
                     <input type="text" name="name" id="" value="{{ $taskGroup->name }}" class="input-title">
                     <div class="underline"></div>
             </div>
-            <button type="submit" class="btn btn-dark save" style="align-self: flex-end">Save</button>
+            <button type="submit" class="btn text-dark btn-dark save" style="align-self: flex-end">Save</button>
         </div>
     </form>
     
@@ -69,13 +76,20 @@
                       <td style="width: 68%;">
                         <span>{{ $t->name }} </span> <br>
                         @if($t->add_to_myday)
+                        <a href="/my_day" class="my-day-link">
                         <i class='bx bx-sun' style="color: darkblue;font-size: 12px"></i>
                         <span style="font-size: 12px">My Day</span>
+                        </a>
                         @endif
                       </td>
                       <td style="text-align: end; width: 30px">
                         @if($t->notes)
                         <i class='bx bx-note'style="color: lightgray"></i>
+                        @endif
+                      </td>
+                      <td style="text-align: end; width: 30px">
+                        @if($t->reminder)
+                        <i class='bx bx-alarm' style="color: lightgray"></i>
                         @endif
                       </td>
                       <td style="padding-top: 10px;">

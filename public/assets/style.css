@@ -127,8 +127,8 @@ body{
 }
 
 .sidebar .nav-links .sub-title .add-taskbtn{
+  background: none;
   color: #fff;
-  text-decoration: none;
   padding: 4px;
   display: flex;
   justify-content: center;
@@ -443,6 +443,17 @@ body{
   input:focus ~ .underline:before{
       transform: scaleX(1);
   }
+
+  .wrapper .save{
+    background: hsl(73, 99%, 73%); 
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    height: 40px;
+    border: #e5e5e5;
+}
+.wrapper .save:hover{
+    font-weight: 600;
+    background: hsl(73, 99%, 73%); 
+}
 
   .container .save, .taskgroup-wrap .save{
       /* background: #d2ef6a; */

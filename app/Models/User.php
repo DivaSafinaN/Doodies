@@ -12,6 +12,14 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function taskGroup(){
+        return $this->hasMany(TaskGroup::class);
+    }
+
+    public function myDay(){
+        return $this->hasMany(MyDay::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *

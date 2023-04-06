@@ -11,18 +11,23 @@
   @endforeach
 </select>
 <div class="mt-3">
-    <ul class="list-group">
-      <li class="list-group-item editbtn">
-        <a href="">
-          <i class='bx bx-alarm'></i>
-          <span>Set Reminder</span>  
-        </a>
-      </li>
-    </ul>
+    <div class="form-group mb-1 mt-3">
+      <label for="reminder" class="form-label"><i class='bx bx-alarm'></i>
+        Reminder</label>
+        @if($task->reminder)
+      <input type="datetime-local" class="form-control" name="reminder" id="reminder" value="{{ \Carbon\Carbon::parse($task->reminder)->format('Y-m-d H:i') }}">
+      @else
+      <input type="datetime-local" class="form-control" name="reminder" id="reminder">
+      @endif
+  </div>
       
     <div class="form-group mb-1 mt-3">
-        <label for="due_date" class="form-label">Add Due Date</label>
-        <input type="datetime-local" class="form-control" name="due_date" id="due_date" value="{{ \Carbon\Carbon::parse($task->due_date)->format('Y-m-d\TH:i') }}">
+        <label for="due_date" class="form-label">Due Date</label>
+        @if($task->due_date)
+        <input type="date" class="form-control" name="due_date" id="due_date" value="{{ \Carbon\Carbon::parse($task->due_date)->format('Y-m-d') }}">
+        @else
+        <input type="date" class="form-control" name="due_date" id="due_date">
+        @endif
     </div>
 
     <div class="mb-1 mt-3">

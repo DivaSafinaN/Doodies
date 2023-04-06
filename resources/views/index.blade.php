@@ -15,7 +15,7 @@
     @livewireStyles
    </head>
 <body>
-  <div class="sidebar close">
+  <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-task'></i>
       <span class="logo_name">To Do-ers</span>
@@ -27,12 +27,12 @@
           <span class="link_name">My Day</span>
         </a>
       </li>
-      <li>
+      {{-- <li>
         <a href="#" class="custombtn">
           <i class='bx bx-home'></i>
           <span class="link_name">Tasks</span>
         </a>
-      </li>
+      </li> --}}
       <div style="display: flex; justify-content: center; margin-top: -5px">
           <hr style="color: #fff; width: 230px">
       </div>
@@ -40,12 +40,12 @@
         <span class="link_name">
           Lists
         </span>
-        <a href="{{ route('task_groups.create') }}" class="add-taskbtn" style="text-decoration: none; color: #fff">
+        <button class="btn add-taskbtn" type="button" onclick="create()">
             <i class='bx bx-plus' style="font-size: 15px; font-weight: 600"></i>
-        </a>
+        </button>
       </p>
 
-      @foreach(App\Models\TaskGroup::all() as $group)
+      @foreach(App\Models\TaskGroup::where('user_id', Auth::id())->get() as $group)
       <li>
         <a href="{{ route('task_groups.edit',$group->id) }}" class="custombtn">
             <i class='bx bx-list-ul'></i>
@@ -104,15 +104,19 @@
               <div class="sub-profile">
                 <div class="user-info">
                   <img src={{ asset("assets/image/avt.png") }}>
-                    <p>Diva Safina
-                      <span>diva.novariana@binus.ac.id</span>
+                    <p>{{ Auth::user()->name }}
+                      <span>{{ Auth::user()->email }}</span>
                     </p>
                 </div>
                 <hr>
-                <a href="#" class="sub-profile-link">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                  document.getElementById('logout-form').submit();" class="sub-profile-link">
                     <i class='bx bx-log-out'></i>
                     <p>Log out</p>
                     <span>></span> 
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                      @csrf
+                  </form>
                 </a>
               </div>
             </div>
@@ -121,6 +125,23 @@
       </div>
     </div>
 </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="page"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
   <div class="home-section">
     <div class="home-content">
@@ -131,6 +152,15 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src={{ asset("assets/script.js") }}></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    function create(){
+      $.get('/task_groups/create' ,function(data){
+      $("#exampleModalLabel").html('Create New List');
+      $("#page").html(data);
+      $("#exampleModal").modal('show');
+  });
+  }
+  </script>
   
   @livewireScripts
   @yield('javascript')

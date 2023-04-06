@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('task_groups', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
-            $table->string('name');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->timestamp('reminder')->nullable();
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_groups');
+        Schema::table('tasks', function (Blueprint $table) {
+            //
+        });
     }
 };
