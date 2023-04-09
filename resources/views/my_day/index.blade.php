@@ -58,6 +58,11 @@
                       <i class='bx bx-note' style="color: lightgray"></i>
                       @endif
                     </td>
+                    <td style="text-align: end; width: 30px">
+                      @if($md->reminder)
+                      <i class='bx bx-alarm' style="color: lightgray"></i>
+                      @endif
+                    </td>
                     <td style="padding-top: 10px;">
                       <div class="duedate">
                         @if ($md->due_date)
@@ -127,6 +132,11 @@
                     <td style="text-align: end; width: 30px">
                       @if($t->notes)
                       <i class='bx bx-note' style="color: lightgray"></i>
+                      @endif
+                    </td>
+                    <td style="text-align: end; width: 30px">
+                      @if($t->reminder)
+                      <i class='bx bx-alarm' style="color: lightgray"></i>
                       @endif
                     </td>
                     <td style="padding-top: 10px;">

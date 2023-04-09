@@ -11,14 +11,15 @@
       @endforeach
     </select>
     <div class="mt-3">
-        <ul class="list-group">
-          <li class="list-group-item editbtn">
-            <a href="">
-              <i class='bx bx-alarm'></i>
-              <span>Set Reminder</span>  
-            </a>
-          </li>
-        </ul>
+      <div class="form-group mb-1 mt-3">
+        <label for="reminder" class="form-label"><i class='bx bx-alarm'></i>
+          Reminder</label>
+          @if($myDay->reminder)
+        <input type="datetime-local" class="form-control" name="reminder" id="reminder" value="{{ \Carbon\Carbon::parse($myDay->reminder)->format('Y-m-d H:i') }}">
+        @else
+        <input type="datetime-local" class="form-control" name="reminder" id="reminder">
+        @endif
+    </div>
           
         <div class="form-group mb-1 mt-3">
             <label for="due_date" class="form-label">Add Due Date</label>

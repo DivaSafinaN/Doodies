@@ -50,6 +50,7 @@ class MyDayController extends Controller
             'name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
+            'reminder' =>'nullable|date'
         ]);
     
         $validatedData['user_id'] = auth()->user()->id;
@@ -95,6 +96,7 @@ class MyDayController extends Controller
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'priority_id' => 'required',
+            'reminder' => 'nullable|date'
         ]);
         
         $myDay->update($validatedData);

@@ -4,7 +4,9 @@ use App\Http\Controllers\MyDayController;
 use App\Http\Controllers\TaskAdditionals;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskGroupController;
+use App\Mail\MyDayReminder;
 use App\Mail\TaskReminder;
+use App\Models\MyDay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +43,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::delete('/my_day/{my_day}/incomplete', 'App\Http\Controllers\MyDayAdditionals@incomplete')->name('my_day.incomplete');
 
     // Route::get('/email', function(){
-    //     $taskreminder = \App\Models\Task::find(3);
-    //     Mail::to("divasafina@email.com")->send(new TaskReminder($taskreminder));
+        // $taskreminder = \App\Models\Task::find(3);
+        // $mydayreminder = MyDay::find(4);
+        // return new MyDayReminder($mydayreminder);
+        // Mail::to("divasafina@email.com")->send(new TaskReminder($taskreminder));
     // });
 });
 

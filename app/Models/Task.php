@@ -25,8 +25,7 @@ class Task extends Model
 
     public function sendReminderEmail()
     {
-        // Send reminder email using Mail facade
-        Mail::to($this->user->email)
+        Mail::to($this->taskGroup->user->email)
             ->send(new TaskReminder($this));
     }
 }

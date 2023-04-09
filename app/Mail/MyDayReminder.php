@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Task;
+use App\Models\MyDay;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -10,19 +10,19 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TaskReminder extends Mailable
+class MyDayReminder extends Mailable
 {
     use Queueable, SerializesModels;
 
-    protected $task;
+    protected $myDay;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(MyDay $myDay)
     {
-        $this->task = $task;
+        $this->myDay = $myDay;
     }
 
     /**
@@ -45,11 +45,10 @@ class TaskReminder extends Mailable
     public function content()
     {
         return new Content(
-            markdown: 'mail.task-reminder',
+            markdown: 'mail.my-day-reminder',
             with: [
-                'name' => $this->task->name,
-                'from' => $this->task->taskGroup->name,
-                'due_date' => $this->task->reminder,
+                'name' => $this->myDay->name,
+                'due_date' => $this->myDay->reminder
             ],
         );
     }
