@@ -1,5 +1,5 @@
 <div class="col">
-<form action="{{ route('task_groups.tasks.update', [$taskGroup, $task]) }}" method="post">
+<form action="{{ route('task_groups.tasks.update', [$taskGroup, $task]) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
 <h5><input class="form-control" type="text" name="name" id="name" value="{{ $task->name }}"></h5>
@@ -33,13 +33,21 @@
     <div class="mb-1 mt-3">
       <label for="formFile" class="form-label">
         <i class='bx bx-link-alt'></i>Attach File</label>
-      <input class="form-control" type="file" id="formFile">
+      <input class="form-control" type="file" id="file" name="file" >
     </div>
   </div>
-<div class="form-group">
+<div class="form-group mt-3">
     <label for="exampleFormControlTextarea1">Notes :</label>
-    <textarea class="form-control" id="notes" rows="3" name="notes">{{ $task->notes }}</textarea>
+    <textarea class="form-control" id="notes" name="notes">{{ $task->notes }}</textarea>
 </div>
 <button type="submit" class="btn btn-primary my-3" style="width: fit-content">Save</button>
 </form>
 </div>
+
+<script>
+  ClassicEditor
+      .create( document.querySelector( '#notes' ) )
+      .catch( error => {
+          console.error( error );
+      } );
+</script>

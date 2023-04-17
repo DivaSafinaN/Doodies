@@ -16,4 +16,16 @@ class MyDayAdditionals extends Controller
         $myDay->update(['completed'=>false]);
         return redirect()->back();
     }
+
+    public function restore($id){
+        $myDay = MyDay::withTrashed()->find($id);
+        $myDay->restore();
+        return redirect()->back();
+    }
+
+    public function delete($id){
+        $myDay = MyDay::withTrashed()->find($id);
+        $myDay->forceDelete();
+        return redirect()->back();
+    }
 }

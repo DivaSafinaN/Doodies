@@ -20,6 +20,8 @@ class Kernel extends ConsoleKernel
         // $schedule->command('inspire')->hourly();
         $schedule->job(new SendTaskReminder)->everyMinute();
         $schedule->job(new SendMyDayReminder)->everyMinute();
+        $schedule->command('trash:deleteMyDay')->daily();
+        $schedule->command('trash:deleteTasks')->daily();
     }
 
     /**

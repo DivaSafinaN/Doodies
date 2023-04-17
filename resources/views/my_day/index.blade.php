@@ -25,9 +25,9 @@
               <table class="table" id="my-day-table">
                 <tbody>
                   @foreach($myDay->sortBy([['due_date','asc']]) as $md)
-                  <tr data-priority="{{ $md->priority_id }}">
-                    <div style="display: flex; align-items: center">
-                      <td style="width: 3%;"><i class='bx bx-move move'></i></td>
+                  <tr data-priority="{{ $md->priority_id }}" style="height: 60px">
+                    <div style="display: flex; align-items: center;">
+                      <td style="width: 3%; justify-content: center"><i class='bx bx-move move'></i></td>
                     </div>
                     <td style="width: 5%;">
                       <div style="display: flex; align-items: center">
@@ -83,7 +83,7 @@
                             <form action="{{ route('my_day.destroy', $md) }}" method="POST">
                               @csrf
                               @method('Delete')
-                              <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                              <button type="submit" style="border: none; background:none" class="ms-2">
                                 <i class='bx bx-trash' style="text-align: center"></i>
                                   <span class="ms-2">Delete</span>
                               </button>
@@ -270,10 +270,10 @@
     });
 
     // Append tasks to table in priority order
-    var priorities = [4, 3, 2, null];
+    var priorities = [4, 3, 2, 1];
     priorities.forEach(function(priorityId) {
         if (tasksByPriority[priorityId]) {
-            $('#my-day-table tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 6).append($('<span>').
+            $('#my-day-table tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 8).append($('<span>').
                 addClass('badge bg-' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
             tasksByPriority[priorityId].forEach(function(row) {
                 $('#my-day-table tbody').append(row);

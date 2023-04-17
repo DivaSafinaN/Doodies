@@ -37,10 +37,18 @@
           <input class="form-control" type="file" id="formFile">
         </div>
       </div>
-    <div class="form-group">
+    <div class="form-group mt-3">
         <label for="exampleFormControlTextarea1">Notes :</label>
-        <textarea class="form-control" id="notes" rows="3" name="notes">{{ $myDay->notes }}</textarea>
+        <textarea class="form-control" id="notes" name="notes">{{ $myDay->notes }}</textarea>
     </div>
     <button type="submit" class="btn btn-primary my-3" style="width: fit-content">Save</button>
     </form>
     </div>
+
+    <script>
+      ClassicEditor
+          .create( document.querySelector( '#notes' ) )
+          .catch( error => {
+              console.error( error );
+          } );
+    </script>

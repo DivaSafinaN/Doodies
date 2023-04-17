@@ -28,6 +28,7 @@ class TaskRequest extends FormRequest
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'priority_id' => 'required',
+            'file' => 'nullable',
             'reminder' => 'nullable|date'
         ];
     }

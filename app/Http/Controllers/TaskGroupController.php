@@ -77,7 +77,7 @@ class TaskGroupController extends Controller
      */
     public function destroy(TaskGroup $taskGroup)
     {
-        $taskGroup->delete();
+        $taskGroup->forceDelete();
         return redirect('my_day');
     }
 

@@ -45,10 +45,10 @@
                 $incompleteTasks = $taskGroup->tasks()->where('completed', false)->get();
                 @endphp
                 
-                <table class="table">
+                <table class="table" id="group">
                   <tbody>
                     @foreach ($incompleteTasks->sortBy([['due_date','asc']]) as $t)
-                    <tr data-priority="{{ $t->priority_id }}">
+                    <tr data-priority="{{ $t->priority_id }}" style="height: 60px">
                       <div style="display: flex; align-items: center">
                         <td style="width: 3%;"><i class='bx bx-move move'></i></td>
                       </div>
@@ -73,13 +73,18 @@
                           </form>
                         </div>
                       </td>
-                      <td style="width: 68%;">
+                      <td style="width: 65%;">
                         <span>{{ $t->name }} </span> <br>
                         @if($t->add_to_myday)
                         <a href="/my_day" class="my-day-link">
                         <i class='bx bx-sun' style="color: darkblue;font-size: 12px"></i>
                         <span style="font-size: 12px">My Day</span>
                         </a>
+                        @endif
+                      </td>
+                      <td style="text-align: end; width: 30px">
+                        @if($t->file)
+                        <i class='bx bx-link-alt'style="color: lightgray"></i>
                         @endif
                       </td>
                       <td style="text-align: end; width: 30px">
@@ -112,7 +117,7 @@
                               <form action="{{ route('task_groups.tasks.destroy', [$taskGroup, $t]) }}" method="POST">
                                 @csrf
                                 @method('Delete')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none" class="ms-2">
                                   <i class='bx bx-trash' style="text-align: center"></i>
                                     <span class="ms-1">Delete</span>
                                 </button>
@@ -207,29 +212,28 @@ function edit(id){
 }
 
 
-$(document).ready(function() {
+  $(document).ready(function() {
     // Group tasks by priority
     var tasksByPriority = {};
-    $('table tbody tr').each(function() {
-      var priorityId = $(this).data('priority');
-      var completed = $(this).find('.checkcol').hasClass('completed');
-      var task = $(this).get(0);
-      if (!tasksByPriority[priorityId]) {
-        tasksByPriority[priorityId] = [];
-      }
-      tasksByPriority[priorityId].push(this);
+    $('#group tbody tr').each(function() {
+        var priorityId = $(this).data('priority');
+        var task = $(this).get(0);
+        if (!tasksByPriority[priorityId]) {
+            tasksByPriority[priorityId] = [];
+        }
+        tasksByPriority[priorityId].push(this);
     });
 
     // Append tasks to table in priority order
-    var priorities = [4, 3, 2, null];
+    var priorities = [4, 3, 2, 1];
     priorities.forEach(function(priorityId) {
-      if (tasksByPriority[priorityId]) {
-        $('table tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 6).append($('<span>').
-          addClass('badge bg-' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
-        tasksByPriority[priorityId].forEach(function(row) {
-          $('table tbody').append(row);
-        });
-      }
+        if (tasksByPriority[priorityId]) {
+            $('#group tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 10).append($('<span>').
+                addClass('badge bg-' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
+            tasksByPriority[priorityId].forEach(function(row) {
+                $('#group tbody').append(row);
+            });
+        }
     });
 
     function getPriorityName(priorityId) {

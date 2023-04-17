@@ -12,7 +12,7 @@ class Task extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['task_group_id','priority_id','name', 'notes','due_date','completed','add_to_myday','reminder'];
+    protected $fillable = ['task_group_id','priority_id','name', 'notes','due_date','file','completed','add_to_myday','reminder','deleted_at'];
 
     public function taskGroup()
     {

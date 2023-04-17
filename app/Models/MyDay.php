@@ -12,7 +12,7 @@ class MyDay extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id','priority_id','name', 'notes','due_date','completed','reminder'];
+    protected $fillable = ['user_id','priority_id','name', 'notes','file','due_date','completed','reminder','deleted_at'];
 
     public function priority(){
         return $this->hasOne(Priority::class);

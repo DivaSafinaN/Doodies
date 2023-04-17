@@ -34,6 +34,7 @@ class TaskController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'notes' => 'nullable',
+            'file' => 'nullable',
             'due_date' => 'nullable|date',
             'reminder' => 'nullable|date',
         ]);
@@ -75,7 +76,16 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, TaskGroup $taskGroup,Task $task)
     {
-        $task->update($request->validated());
+        $data = $request->validated();
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path().'/file',$fileName);
+            $data['file'] = $fileName;
+        }
+
+        $task->update($data);
         // dd($task);
         return redirect()->back();
     }

@@ -19,8 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('priority_id')->default(1);
             $table->string('name');
             $table->text('notes')->nullable();
+            $table->string('file')->nullable();
             $table->text('due_date')->nullable();
             $table->boolean('completed')->default(false);
+            $table->timestamp('reminder')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

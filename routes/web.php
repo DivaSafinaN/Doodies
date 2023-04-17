@@ -37,10 +37,14 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/completed_tasks', 'App\Http\Controllers\TaskAdditionals@comtask')->name('completed_tasks');
     Route::put('/task_groups/{task_group}/tasks/{task}/addtomyday', 'App\Http\Controllers\TaskAdditionals@addtomyday')->name('task_groups.tasks.addtomyday');
     Route::delete('/task_groups/{task_group}/tasks/{task}/removefrmyday', 'App\Http\Controllers\TaskAdditionals@removefrmyday')->name('task_groups.tasks.removefrmyday');
-
+    Route::get('/trash', 'App\Http\Controllers\TaskAdditionals@trash')->name('trash');
+    Route::put('/task_groups/{task_group}/tasks/{task}/restore', 'App\Http\Controllers\TaskAdditionals@restore')->name('task_groups.tasks.restore');
+    Route::delete('/task_groups/{task_group}/tasks/{task}/delete', 'App\Http\Controllers\TaskAdditionals@delete')->name('task_groups.tasks.delete');
 
     Route::put('/my_day/{my_day}/complete', 'App\Http\Controllers\MyDayAdditionals@complete')->name('my_day.complete');
     Route::delete('/my_day/{my_day}/incomplete', 'App\Http\Controllers\MyDayAdditionals@incomplete')->name('my_day.incomplete');
+    Route::put('/my_day/{my_day}/restore', 'App\Http\Controllers\MyDayAdditionals@restore')->name('my_day.restore');
+    Route::delete('/my_day/{my_day}/delete', 'App\Http\Controllers\MyDayAdditionals@delete')->name('my_day.delete');
 
     // Route::get('/email', function(){
         // $taskreminder = \App\Models\Task::find(3);

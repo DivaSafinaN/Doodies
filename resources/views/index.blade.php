@@ -65,7 +65,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="/trash">
           <i class='bx bx-trash'></i>
           <span class="link_name">Trash</span>
         </a>
@@ -106,6 +106,7 @@
                   <img src={{ asset("assets/image/avt.png") }}>
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
+                      <span><a href=""><i class='bx bx-edit' style="font-size: 15px"></i></a> | <a href="">Change Password</a></span>
                     </p>
                 </div>
                 <hr>
@@ -152,6 +153,8 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src={{ asset("assets/script.js") }}></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
   <script>
     function create(){
       $.get('/task_groups/create' ,function(data){

@@ -15,12 +15,15 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_group_id')->constrained();
+            $table->foreignId('task_group_id')->constrained()->onDelete('cascade');
             $table->unsignedBigInteger('priority_id')->default(1);
             $table->string('name');
             $table->text('notes')->nullable();
             $table->text('due_date')->nullable();
+            $table->string('file')->nullable();
             $table->boolean('completed')->default(false);
+            $table->boolean('add_to_myday')->default(false);
+            $table->timestamp('reminder')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
