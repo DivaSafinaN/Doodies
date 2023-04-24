@@ -28,4 +28,15 @@ class MyDayAdditionals extends Controller
         $myDay->forceDelete();
         return redirect()->back();
     }
+
+    public function filegone(MyDay $myDay){
+        $filePath = public_path().'/mydayfile/'.$myDay->file;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+    
+        $myDay->update(['file' => null]);
+    
+        return redirect()->back();
+    }
 }

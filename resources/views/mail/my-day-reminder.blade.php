@@ -5,7 +5,7 @@ You have a task that is due soon:
 
 Task Name: {{ $name }} <br>
 From: My Day <br>
-Due Date: {{ \Carbon\Carbon::parse($due_date)->format('d M Y H:i')}} 
+Due Date: {{ \Carbon\Carbon::parse($due_date)->format('d M Y')}} 
     
 {{-- <x-mail::button :url="''">
 Button Text

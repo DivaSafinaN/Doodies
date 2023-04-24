@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('my_days', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('priority_id')->default(1);
             $table->string('name');
             $table->text('notes')->nullable();

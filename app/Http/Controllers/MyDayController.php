@@ -96,11 +96,19 @@ class MyDayController extends Controller
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'priority_id' => 'required',
-            'reminder' => 'nullable|date'
+            'reminder' => 'nullable|date',
+            'file' => 'nullable'
         ]);
-        
-        $myDay->update($validatedData);
 
+        if($request->hasFile('file')){
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $file->move(public_path().'/mydayfile',$fileName);
+            $validatedData['file'] = $fileName;
+        }
+
+        $myDay->update($validatedData);
+        // dd($myDay);
         return redirect()->back();
 
     }

@@ -45,7 +45,7 @@
                         </div>
                       </td>
                       <td style="width: 5%; text-align: end;">
-                        <button onclick="edit({{ $t->id }})"><i class='bx bx-edit' style="color: lightgray"></i></button>
+                        <button class="editbtn" onclick="edit({{ $t->id }})"><i class='bx bx-edit' style="color: lightgray"></i></button>
                       </td>
                       <td style="width: 5%; text-align: center;">
                         <div class="dropdown">
@@ -57,7 +57,7 @@
                               <form action="{{ route('task_groups.tasks.destroy', [$taskGroup, $t]) }}" method="POST">
                                 @csrf
                                 @method('Delete')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none" class="ms-2">
                                   <i class='bx bx-trash' style="text-align: center"></i>
                                     <span class="ms-2">Delete</span>
                                 </button>
@@ -103,7 +103,7 @@
                         </div>
                       </td>
                       <td style="width: 5%; text-align: end;">
-                        <button onclick="editMD({{ $ct->id }})"><i class='bx bx-edit' style="color: lightgray"></i></button>
+                        <button class="editbtn" onclick="editMD({{ $ct->id }})"><i class='bx bx-edit' style="color: lightgray"></i></button>
                       </td>
                       <td style="width: 5%; text-align: center;">
                         <div class="dropdown">
@@ -115,7 +115,7 @@
                               <form action="{{ route('my_day.destroy', $ct) }}" method="POST">
                                 @csrf
                                 @method('Delete')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none" class="ms-2">
                                   <i class='bx bx-trash' style="text-align: center"></i>
                                     <span class="ms-2">Delete</span>
                                 </button>

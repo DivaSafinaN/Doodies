@@ -48,7 +48,7 @@ class MyDayReminder extends Mailable
             markdown: 'mail.my-day-reminder',
             with: [
                 'name' => $this->myDay->name,
-                'due_date' => $this->myDay->reminder
+                'due_date' => $this->myDay->due_date
             ],
         );
     }

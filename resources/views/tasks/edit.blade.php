@@ -1,3 +1,21 @@
+<style>
+    div .files{
+    background: #f8f8f8;
+    width: 100%;
+    border: lightgray solid 1px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  div .files a{
+    align-items: center;
+    display: flex;
+    color: black;
+    text-decoration: underline;
+    margin-left: 10px;
+  }
+</style>
+
 <div class="col">
 <form action="{{ route('task_groups.tasks.update', [$taskGroup, $task]) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
@@ -30,12 +48,23 @@
         @endif
     </div>
 
-    <div class="mb-1 mt-3">
-      <label for="formFile" class="form-label">
+  <div class="mb-1 mt-3">
+    <label for="formFile" class="form-label">
         <i class='bx bx-link-alt'></i>Attach File</label>
-      <input class="form-control" type="file" id="file" name="file" >
-    </div>
-  </div>
+        @if ($task->file)
+            <div class="mb-2 files">
+                <a href="{{ asset('file/' . $task->file) }}" target="_blank">{{ $task->file }}</a>
+                  <button type="submit" class="btn filebtn text-danger"
+                  onclick="event.preventDefault(); document.getElementById('fileT-{{ $task->id }}').submit()">Delete</button>
+            </div>
+            <form style="visibility: hidden"></form>
+            <form action="{{ route('task_groups.tasks.fileTgone', [$taskGroup, $task]) }}" 
+            method="post" id="{{ 'fileT-'.$task->id }}">@csrf @method('put')</form>
+            @else
+            <input class="form-control" type="file" id="file" name="file">
+        @endif
+</div>
+
 <div class="form-group mt-3">
     <label for="exampleFormControlTextarea1">Notes :</label>
     <textarea class="form-control" id="notes" name="notes">{{ $task->notes }}</textarea>

@@ -1,5 +1,23 @@
+<style>
+  div .files{
+    background: #f8f8f8;
+    width: 100%;
+    border: lightgray solid 1px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+  }
+  div .files a{
+    align-items: center;
+    display: flex;
+    color: black;
+    text-decoration: underline;
+    margin-left: 10px;
+  }
+</style>
+
 <div class="col">
-    <form action="{{ route('my_day.update', $myDay )}}" method="post">
+    <form action="{{ route('my_day.update', $myDay )}}" method="post" enctype="multipart/form-data">
         @method('PUT')
         @csrf
     <h5><input class="form-control" type="text" name="name" id="name" value="{{ $myDay->name }}"></h5>
@@ -30,19 +48,32 @@
             <input type="date" class="form-control" name="due_date" id="due_date" >
             @endif
         </div>
-    
-        <div class="mb-1 mt-3">
-          <label for="formFile" class="form-label">
+
+
+      <div class="mb-1 mt-3">
+        <label for="formFile" class="form-label">
             <i class='bx bx-link-alt'></i>Attach File</label>
-          <input class="form-control" type="file" id="formFile">
-        </div>
-      </div>
+            @if ($myDay->file)
+            <div class="mb-2 files">
+                <a href="{{ asset('mydayfile/' . $myDay->file) }}" target="_blank">{{ $myDay->file }}</a>
+                <button type="button" class="btn filebtn text-danger"
+                onclick="event.preventDefault(); document.getElementById('file-{{ $myDay->id }}').submit()">Delete</button>
+            </div>
+            @else
+            <input class="form-control" type="file" id="file" name="file">
+            @endif
+            <form style="visibility: hidden"></form>
+            <form action="{{ route('my_day.filegone', $myDay) }}" method="post" id="{{ 'file-'.$myDay->id }}">@csrf @method('put')</form>
+          </div>
+
     <div class="form-group mt-3">
         <label for="exampleFormControlTextarea1">Notes :</label>
         <textarea class="form-control" id="notes" name="notes">{{ $myDay->notes }}</textarea>
     </div>
     <button type="submit" class="btn btn-primary my-3" style="width: fit-content">Save</button>
     </form>
+
+ 
     </div>
 
     <script>

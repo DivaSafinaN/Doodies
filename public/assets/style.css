@@ -581,7 +581,7 @@ body{
     color: #a8bbbf;
   }
 
-  .table td button{
+  .table td .editbtn{
     text-decoration: none;
     border: none;
     background: none;

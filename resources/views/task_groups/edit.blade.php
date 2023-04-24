@@ -105,7 +105,7 @@
                         </div>
                       </td>
                       <td style="width: 5%; text-align: end;">
-                        <button onclick="edit({{ $t->id }})"><i class='bx bx-edit'></i></button>
+                        <button class="editbtn" onclick="edit({{ $t->id }})"><i class='bx bx-edit'></i></button>
                       </td>
                       <td style="width: 5%; text-align: center;">
                         <div class="dropdown">
@@ -125,7 +125,7 @@
                             </li>
                             <li class="drop-custom mt-1">
                               @if($t->add_to_myday)
-                              <button style="color: #dc3545"
+                              <button style="color: #dc3545; background:none; border: none"
                                 onclick="event.preventDefault(); document.getElementById('remove-fr-md-{{ $t->id }}').submit()">
                                 <i class='bx bx-x ms-2'></i>
                                 <span class="ms-1">Added to My Day</span>
@@ -136,8 +136,9 @@
                                 @method('delete')
                               </form>
                               @else
-                              <button onclick="event.preventDefault(); document.getElementById('add-to-md-{{ $t->id }}').submit()">
-                                <i class='bx bx-sun ms-2' style="text-align: center"></i>
+                              <button onclick="event.preventDefault(); document.getElementById('add-to-md-{{ $t->id }}').submit()"
+                               style="border: none;background: none">
+                                <i class='bx bx-sun ms-2' style="text-align: center;"></i>
                                 <span class="ms-1">Add to My Day</span>
                               </button>
                               <form action="{{ route('task_groups.tasks.addtomyday',[$taskGroup, $t]) }}" id="{{ 'add-to-md-'.$t->id }}" 

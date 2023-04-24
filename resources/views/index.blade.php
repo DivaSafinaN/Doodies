@@ -21,18 +21,20 @@
       <span class="logo_name">To Do-ers</span>
     </div>
     <ul class="nav-links">
+      @if(auth()->user()->is_admin)
+      <li>
+        <a href="/manage-user" class="custombtn">
+          <i class='bx bx-user-circle'></i>
+          <span class="link_name">Manage User</span>
+        </a>
+      </li>
+      @else
       <li>
         <a href="/my_day" class="custombtn">
           <i class='bx bx-sun'></i>
           <span class="link_name">My Day</span>
         </a>
       </li>
-      {{-- <li>
-        <a href="#" class="custombtn">
-          <i class='bx bx-home'></i>
-          <span class="link_name">Tasks</span>
-        </a>
-      </li> --}}
       <div style="display: flex; justify-content: center; margin-top: -5px">
           <hr style="color: #fff; width: 230px">
       </div>
@@ -59,18 +61,18 @@
       </div>
 
       <li>
-        <a href="/completed_tasks">
+        <a href="/completed_tasks" class="custombtn">
           <i class='bx bxs-check-square'></i>          
           <span class="link_name">Completed</span>
         </a>
       </li>
       <li>
-        <a href="/trash">
+        <a href="/trash" class="custombtn">
           <i class='bx bx-trash'></i>
           <span class="link_name">Trash</span>
         </a>
       </li>
-
+      @endif
 </ul>
 </div>
 <!-- Home Section -->
@@ -84,20 +86,7 @@
   
     <div class=" collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto ">
-        <li class="nav-item">
-          <form class="d-flex input-group" role="search">
-            <div class="inner-form">
-              <div class="input-field">
-                <button class="btn-search" type="button">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                  </svg>
-                </button>
-                <input id="search" type="text" placeholder="Search" />
-              </div>
-            </div>
-          </form>
-        </li>
+        @include('search')
         <li class="nav-item mx-4">
           <img src={{ asset("assets/image/avt.png") }} class="user-pic" onclick="toggleMenu()">
             <div class="profile" id="Profile">
@@ -106,7 +95,8 @@
                   <img src={{ asset("assets/image/avt.png") }}>
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
-                      <span><a href=""><i class='bx bx-edit' style="font-size: 15px"></i></a> | <a href="">Change Password</a></span>
+                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' style="font-size: 15px"></i></a> | 
+                        <a href="{{ route('edit-password') }}">Change Password</a></span>
                     </p>
                 </div>
                 <hr>

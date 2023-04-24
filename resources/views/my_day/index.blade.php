@@ -50,8 +50,13 @@
                         </form>
                       </div>
                     </td>
-                    <td style="width: 68%;">
+                    <td style="width: 65%;">
                       <span>{{ $md->name }}</span>
+                    </td>
+                    <td style="text-align: end; width: 30px">
+                      @if($md->file)
+                      <i class='bx bx-link-alt'style="color: lightgray"></i>
+                      @endif
                     </td>
                     <td style="text-align: end; width: 30px">
                       @if($md->notes)
@@ -71,7 +76,7 @@
                       </div>
                     </td>
                     <td style="width: 5%; text-align: end;">
-                      <button onclick="editMD({{ $md->id }})"><i class='bx bx-edit'></i></button>
+                      <button class="editbtn" onclick="editMD({{ $md->id }})"><i class='bx bx-edit'></i></button>
                     </td>
                     <td style="width: 5%; text-align: center;">
                       <div class="dropdown">
@@ -122,12 +127,17 @@
                         </form>
                       </div>
                     </td>
-                    <td style="width: 68%">
+                    <td style="width: 65%">
                       <span>{{ $t->name }}</span> <br>
                       <span style="font-size: 12px">
                         <i><a href="{{ route('task_groups.edit',$taskGroup->id) }}" class="group-id">
                         {{ $taskGroup->name }}</a></i>
                       </span>
+                    </td>
+                    <td style="text-align: end; width: 30px">
+                      @if($t->file)
+                      <i class='bx bx-link-alt'style="color: lightgray"></i>
+                      @endif
                     </td>
                     <td style="text-align: end; width: 30px">
                       @if($t->notes)
@@ -147,7 +157,7 @@
                       </div>
                     </td>
                     <td style="width: 5%; text-align: end;">
-                      <button onclick="edit({{ $t->id }})"><i class='bx bx-edit'></i></button>
+                      <button class="editbtn" onclick="edit({{ $t->id }})"><i class='bx bx-edit'></i></button>
                     </td>
                     <td style="width: 5%; text-align: center;">
                       <div class="dropdown">
@@ -167,7 +177,7 @@
                           </li>
                           <li class="drop-custom mt-1">
                             @if($t->add_to_myday)
-                            <button style="color: #dc3545"
+                            <button style="color: #dc3545;border: none;background: none"
                               onclick="event.preventDefault(); document.getElementById('remove-fr-md-{{ $t->id }}').submit()">
                               <i class='bx bx-x ms-2'></i>
                               <span class="ms-1">Added to My Day</span>
@@ -178,7 +188,8 @@
                               @method('delete')
                             </form>
                             @else
-                            <button onclick="event.preventDefault(); document.getElementById('add-to-md-{{ $t->id }}').submit()">
+                            <button onclick="event.preventDefault(); document.getElementById('add-to-md-{{ $t->id }}').submit()"
+                              style="border: none;background: none">
                               <i class='bx bx-sun ms-2' style="text-align: center"></i>
                               <span class="ms-1">Add to My Day</span>
                             </button>

@@ -69,4 +69,16 @@ class TaskAdditionals extends Controller
         $task->forceDelete();
         return redirect()->back();
     }
+
+    public function fileTgone(TaskGroup $taskGroup, Task $task)
+    {
+        $filePath = public_path().'/file/'.$task->file;
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        $task->update(['file' => null]);
+
+        return redirect()->back();
+    }
 }
