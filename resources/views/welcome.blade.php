@@ -1,4 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Doodies | A friendly to do list to help manage your life</title>
+        <meta name="description" content="Union is a beautiful Bootstrap 4 template for multipurpose landing pages." /> 
+
+        <!--Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Arimo:400,400i,700,700i" rel="stylesheet">
+
+        <!--vendors styles-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS / Color Scheme -->
+        <link rel="stylesheet" href={{ asset("assets/black.css") }} id="theme-color">
+    </head>
+    <body>
+
+        <!--navigation-->
+        <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
+            <a class="navbar-brand mx-auto" href="index.html">
+                Doodies
+            </a>
+            <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
+                    data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span data-feather="grid"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link page-scroll" href="#about">About</a>
+                    </li>
+                </ul>
+                <form class="form-inline">
+                    <p class="mb-0 mx-3"><a class="page-scroll font-weight-bold" href="#get-started">Get Started</a></p>
+                </form>
+            </div>
+        </nav>
+
+        <!--hero header-->
+        <section class="pt-7 pt-md-8" id="home">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto my-auto text-center">
+                        <h1>Know your priorities. Keep organized.</h1>
+                        <p class="lead mt-4 mb-5">
+                            Organize your activities to make your life easier with Doodies.
+                        </p>
+                        <p><img class="img-fluid" src={{ asset("img/mockup.png") }} alt="Mockup" /></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- about section -->
+        <section class="pb-7" id="about">
+            <div class="container">
+                <hr class="my-6"/>
+                <div class="row">
+                    <div class="col-md-6 mx-auto text-center">
+                        <h4 class="dot-circle font-weight-normal">
+                            Stay focused. Know your priorities. Be productive.
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-md-6 order-2 order-md-1 my-md-auto">
+                        <h3>Organize your activities.</h3>
+                        <p class="text-muted lead">
+                            Add your tasks to fill your to-do list using Doodies. Create lists to control your tasks. 
+                            Doodies will automatically sort your tasks by priorities and due dates.
+                        </p>
+                    </div>
+                    <div class="col-md-6 order-1 order-md-2">
+                        <img src={{ asset("img/google-design.jpeg") }} class="img-fluid d-block mx-auto" alt="Google Design"/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src={{ asset("img/facebook-messenger.jpeg") }} class="img-fluid d-block mx-auto" alt="Facebook Messenger"/>
+                    </div>
+                    <div class="col-md-6 my-md-auto">
+                        <h3>Always keep up with you.</h3>
+                        <p class="text-muted lead">
+                            Set a reminder so you will never miss your deadline. Doodies will notify your tasks 
+                            anywhere, anytime.
+                        </p>
+                    </div>
+                </div>
+
+                <section class="pt-md-5" id="get-started">
+                    <div class="row mt-6">
+                        <div class="col-md-8 mx-auto text-center">
+                            <h1>Make your life easier with Doodies</h1>
+                            <a href="{{ route('login') }}" class="btn btn-primary"><strong style="font-size: 23px;">Get Started</strong></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!--footer / contact-->
+        <footer class="py-3 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-muted text-center small-xl">
+                        &copy; 2023 Doodies Team
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--scroll to top-->
+        <div class="scroll-top">
+            <i class="fa fa-angle-up" aria-hidden="true"></i>
+        </div>
+
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src={{ asset("https://code.jquery.com/jquery-3.2.1.min.js") }}></script>
+        <script src={{ asset("https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js") }}></script>
+        <script src={{ asset("https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js") }}></script>
+        <script src={{ asset("https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.5.0/feather.min.js") }}></script>
+        <script src={{ asset("js/scripts.js") }}></script>
+    </body>
+</html>
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -129,4 +258,4 @@
             </div>
         </div>
     </body>
-</html>
+</html> --}}

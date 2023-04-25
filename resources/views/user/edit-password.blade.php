@@ -19,13 +19,13 @@
                         @csrf
                         @method('put')
                         <div class="row mb-3">
-                            <label for="current-password" class="col-md-4 col-form-label text-md-end">{{ __('Current Password') }}</label>
+                            <label for="current_password" class="col-md-4 col-form-label text-md-end">{{ __('Current Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="current-password" type="password" class="form-control @error('current-password') is-invalid @enderror" 
-                                name="current-password" required autocomplete="current-password">
+                                <input id="current_password" type="password" class="form-control @error('current_password') is-invalid @enderror" 
+                                name="current_password" required autocomplete="current_password">
 
-                                @error('current-password')
+                                @error('current_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -38,7 +38,7 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
-                                name="current-password" required autocomplete="current-password">
+                                name="password" required autocomplete="password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">

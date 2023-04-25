@@ -88,11 +88,12 @@
       <ul class="navbar-nav ms-auto ">
         @include('search')
         <li class="nav-item mx-4">
-          <img src={{ asset("assets/image/avt.png") }} class="user-pic" onclick="toggleMenu()">
+          <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d6fe43&rounded=true" 
+          class="user-pic" onclick="toggleMenu()">
             <div class="profile" id="Profile">
               <div class="sub-profile">
                 <div class="user-info">
-                  <img src={{ asset("assets/image/avt.png") }}>
+                  <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d6fe43&rounded=true" >
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
                       <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' style="font-size: 15px"></i></a> | 

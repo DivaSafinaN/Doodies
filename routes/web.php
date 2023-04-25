@@ -31,9 +31,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+// Auth::routes();
+
+Route::get('/register', [UserController::class,'register'])->name('register');
+Route::post('/register', [UserController::class,'store'])->name('register');
+Route::get('/login', [UserController::class,'login'])->name('login');
+Route::post('/login', [UserController::class,'enter'])->name('login');
 
 Route::group(['middleware' => 'auth'], function(){
+    Route::post('/logout', [UserController::class,'__invoke'])->name('logout');
     Route::resource('my_day', MyDayController::class);
     Route::resource('task_groups', TaskGroupController::class);
     Route::resource('task_groups.tasks', TaskController::class);
