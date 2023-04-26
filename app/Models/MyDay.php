@@ -12,7 +12,7 @@ class MyDay extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['user_id','priority_id','name', 'notes','file','due_date','completed','reminder','deleted_at'];
+    protected $fillable = ['user_id','priority_id','name', 'notes','file','due_date','completed','reminder','deleted_at','task_group_id'];
 
     public function priority(){
         return $this->hasOne(Priority::class);
@@ -20,6 +20,10 @@ class MyDay extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function taskGroup(){
+        return $this->belongsTo(TaskGroup::class);
     }
     public function sendReminderEmail()
     {

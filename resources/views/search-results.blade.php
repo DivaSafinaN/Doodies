@@ -1,9 +1,28 @@
 @extends('index')
-@section('title', 'My Day')
+@section('title', 'Search Results')
 @section('content')
+@section('css')
+<style>
+  .table tbody td .group-id{
+    text-decoration: none;
+    color: black;
+  }
+  .table tbody td .group-id:hover{
+    text-decoration: underline;
+  }
+
+  .table tbody td .my-day-link{
+    text-decoration: none;
+    color: black;
+  }
+  .table tbody td .my-day-link:hover{
+    text-decoration: underline;
+  }
+</style>
+@endsection
 <h5>Search Results:</h5>
 
-@if(count($tasks))
+
 <div class="container-fluid mt-3">
     <div class="col-md-10">
       <div class="card-hover-shadow-2x mb-3 card">
@@ -13,6 +32,7 @@
               <div class="ps-content">
                 <table class="table" id="my-day-table">
                 <tbody>
+                    @if(count($tasks))
                     @foreach($tasks as $t)
                     <tr data-priority="{{ $t->priority_id }}">
                         <div style="display: flex; align-items: center">

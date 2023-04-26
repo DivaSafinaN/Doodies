@@ -19,6 +19,10 @@ class TaskGroup extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function myDay(){
+        return $this->belongsTo(MyDay::class);
+    }
     protected static function boot()
     {
         parent::boot();

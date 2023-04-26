@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskGroupRequest;
+use App\Models\MyDay;
 use App\Models\Task;
 use App\Models\TaskGroup;
 use Illuminate\Http\Request;
@@ -51,7 +52,8 @@ class TaskGroupController extends Controller
      */
     public function edit(TaskGroup $taskGroup, $sort=null)
     {
-        return view('task_groups.edit', compact('taskGroup'));
+        $myDay = MyDay::where('task_group_id', $taskGroup->id)->get();
+        return view('task_groups.edit', compact('taskGroup','myDay'));
     }
 
     /**

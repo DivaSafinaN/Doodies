@@ -127,26 +127,17 @@
 
                             @if($md->task_group_id)
                             <li class="drop-custom">
-                              {{-- <button style="color: #dc3545;border: none;background: none"
-                              onclick="event.preventDefault(); document.getElementById('remove-fr-md-{{ $t->id }}').submit()">
-                              <i class='bx bx-x ms-2'></i>
-                              <span class="ms-1">Added to My Day</span>
-                            </button>
-                            <form action="{{ route('task_groups.tasks.removefrmyday',[$taskGroup, $t]) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
-                              method="POST" style="display: none">
-                              @csrf
-                              @method('delete')
-                            </form> --}}
                               <button style="color: #dc3545;border: none;background: none"
                               onclick="event.preventDefault(); document.getElementById('remove-{{ $md->id }}-fr-{{ $taskGroup->id }}').submit()">
                                 <i class='bx bx-x ms-2'></i>
                                 <span class="ms-3">Remove </span>
                               </button>
-                              <form action="{{ route('task_groups.tasks.removefrmyday',[$taskGroup, $t]) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
+                              <form action="{{ route('my_day.no-taskgroup', $md) }}" id="{{ 'remove-'.$md->id.'-fr-'.$taskGroup->id }}" 
                                 method="POST" style="display: none">
                                 @csrf
                                 @method('delete')
                                 <input type="hidden" name="task_group_id" value="{{ $taskGroup->id }}">
+                                <input type="hidden" name="id" value="{{ $md->id }}">
                               </form>
                             </li>
                             @endif

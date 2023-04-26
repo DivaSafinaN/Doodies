@@ -20,8 +20,8 @@
 
         <!--navigation-->
         <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
-            <a class="navbar-brand mx-auto" href="index.html">
-                Doodies
+            <a class="navbar-brand mx-auto" href="/">
+                Dolistz
             </a>
             <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" 
                     data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,7 +48,7 @@
                         <p class="lead mt-4 mb-5">
                             Organize your activities to make your life easier with Doodies.
                         </p>
-                        <p><img class="img-fluid" src={{ asset("img/mockup.png") }} alt="Mockup" /></p>
+                        {{-- <p><img class="img-fluid" src={{ asset("img/mockup.png") }} alt="Mockup" /></p> --}}
                     </div>
                 </div>
             </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-8">
                     <div class="col-md-6 order-2 order-md-1 my-md-auto">
                         <h3>Organize your activities.</h3>
                         <p class="text-muted lead">
@@ -75,13 +75,13 @@
                         </p>
                     </div>
                     <div class="col-md-6 order-1 order-md-2">
-                        <img src={{ asset("img/google-design.jpeg") }} class="img-fluid d-block mx-auto" alt="Google Design"/>
+                        <img src={{ asset("img/img-1.jpg") }} class="img-fluid d-block mx-auto" alt="Google Design"/>
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row mt-7">
                     <div class="col-md-6">
-                        <img src={{ asset("img/facebook-messenger.jpeg") }} class="img-fluid d-block mx-auto" alt="Facebook Messenger"/>
+                        <img src={{ asset("img/img-2.jpg") }} class="img-fluid d-block mx-auto" alt="Facebook Messenger"/>
                     </div>
                     <div class="col-md-6 my-md-auto">
                         <h3>Always keep up with you.</h3>
@@ -92,10 +92,10 @@
                     </div>
                 </div>
 
-                <section class="pt-md-5" id="get-started">
+                <section class="mt-5 mb-5 pt-md-5" id="get-started">
                     <div class="row mt-6">
-                        <div class="col-md-8 mx-auto text-center">
-                            <h1>Make your life easier with Doodies</h1>
+                        <div class="col-md-10 mx-auto text-center">
+                            <h1 style="font-size: 50px">Make your life easier with Doodies</h1>
                             <a href="{{ route('login') }}" class="btn btn-primary"><strong style="font-size: 23px;">Get Started</strong></a>
                         </div>
                     </div>

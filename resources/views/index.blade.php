@@ -10,7 +10,7 @@
     @yield('css')
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    {{-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @livewireStyles
    </head>
@@ -18,7 +18,7 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-task'></i>
-      <span class="logo_name">To Do-ers</span>
+      <span class="logo_name">Dolistz</span>
     </div>
     <ul class="nav-links">
       @if(auth()->user()->is_admin)
@@ -96,8 +96,8 @@
                   <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d6fe43&rounded=true" >
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
-                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' style="font-size: 15px"></i></a> | 
-                        <a href="{{ route('edit-password') }}">Change Password</a></span>
+                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' style="font-size: 15px;color:blue"></i></a> | 
+                        <a href="{{ route('edit-password') }}" style="color:blue">Change Password</a></span>
                     </p>
                 </div>
                 <hr>

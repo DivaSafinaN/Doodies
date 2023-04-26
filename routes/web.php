@@ -31,8 +31,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
-
 Route::get('/register', [UserController::class,'register'])->name('register');
 Route::post('/register', [UserController::class,'store'])->name('register');
 Route::get('/login', [UserController::class,'login'])->name('login');
@@ -65,6 +63,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/update-profile',[UserController::class,'update_profile'])->name('update-profile');
     Route::get('/edit-password',[UserController::class,'edit_password'])->name('edit-password');
     Route::put('/update-password',[UserController::class,'update_password'])->name('update-password');
+
+    Route::put('/my_day/{my_day}/to-taskgroup', [MyDayAdditionals::class, 'addToTaskGroup'])->name('my_day.to-taskgroup');
+    Route::delete('/my_day/{my_day}/no-taskgroup', [MyDayAdditionals::class, 'delFrTaskGroup'])->name('my_day.no-taskgroup');
 
     Route::group(['middleware' => 'is_admin'], function(){
         Route::get('/manage-user', [AdminController::class, 'index'])->name('admin.manage-user');

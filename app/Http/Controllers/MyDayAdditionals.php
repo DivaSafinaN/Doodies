@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MyDay;
+use App\Models\TaskGroup;
 use Illuminate\Http\Request;
 
 class MyDayAdditionals extends Controller
@@ -38,5 +39,25 @@ class MyDayAdditionals extends Controller
         $myDay->update(['file' => null]);
     
         return redirect()->back();
+    }
+
+    public function addToTaskGroup(Request $request, MyDay $myDay){
+        $request->validate([
+            'task_group_id' => 'required|exists:task_groups,id',
+        ]);
+    
+        $myDay->task_group_id = $request->task_group_id;
+
+        $myDay->save();
+        return redirect()->back();
+    }
+
+    public function delFrTaskGroup(MyDay $myDay){
+        $myDay->task_group_id;
+        $myDay->task_group_id = null;
+
+        $myDay->save();
+        return redirect()->back();
+
     }
 }
