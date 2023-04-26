@@ -50,8 +50,17 @@
                         </form>
                       </div>
                     </td>
-                    <td style="width: 65%;">
-                      <span>{{ $md->name }}</span>
+                    <td style="width: 62%;">
+                      <span>{{ $md->name }}</span> <br>
+                      @if ($md->taskGroup)
+                      <span style="font-size: 12px">
+                        <i>
+                          <a href="{{  route('task_groups.edit',$md->taskGroup->id) }}" class="group-id">
+                            {{ $md->taskGroup->name }}
+                          </a>
+                        </i>
+                      </span>
+                      @endif
                     </td>
                     <td style="text-align: end; width: 30px">
                       @if($md->file)
@@ -94,6 +103,54 @@
                               </button>
                               </form>
                           </li>
+                          @if(!$taskGroups->isEmpty())
+                          <li><hr class="dropdown-divider"></li>
+                          <li class="my-2">
+                            <span class="ms-3">Add task to: </span>
+                          </li>
+                          
+                            @foreach($taskGroups as $taskGroup)
+                            <li class="drop-custom">
+                              <button onclick="event.preventDefault(); document.getElementById('add-{{ $md->id }}-to-tg-{{ $taskGroup->id }}').submit()"
+                              style="border: none; background:none; width: 140px; display:flex" class="ms-2">
+                                  <span class="ms-2" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
+                                    {{ $taskGroup->name }}  
+                                  </span>
+                              </button>
+                              <form id="{{ 'add-'.$md->id.'-to-tg-'.$taskGroup->id }}" action="{{ route('my_day.to-taskgroup', $md) }}" method="POST" style="display: none;">
+                                @csrf
+                                @method('put')
+                                <input type="hidden" name="task_group_id" value="{{ $taskGroup->id }}">
+                              </form>
+                            </li>
+                            @endforeach
+
+                            @if($md->task_group_id)
+                            <li class="drop-custom">
+                              {{-- <button style="color: #dc3545;border: none;background: none"
+                              onclick="event.preventDefault(); document.getElementById('remove-fr-md-{{ $t->id }}').submit()">
+                              <i class='bx bx-x ms-2'></i>
+                              <span class="ms-1">Added to My Day</span>
+                            </button>
+                            <form action="{{ route('task_groups.tasks.removefrmyday',[$taskGroup, $t]) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
+                              method="POST" style="display: none">
+                              @csrf
+                              @method('delete')
+                            </form> --}}
+                              <button style="color: #dc3545;border: none;background: none"
+                              onclick="event.preventDefault(); document.getElementById('remove-{{ $md->id }}-fr-{{ $taskGroup->id }}').submit()">
+                                <i class='bx bx-x ms-2'></i>
+                                <span class="ms-3">Remove </span>
+                              </button>
+                              <form action="{{ route('task_groups.tasks.removefrmyday',[$taskGroup, $t]) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
+                                method="POST" style="display: none">
+                                @csrf
+                                @method('delete')
+                                <input type="hidden" name="task_group_id" value="{{ $taskGroup->id }}">
+                              </form>
+                            </li>
+                            @endif
+                          @endif
                         </ul>
                       </div>
                     </td>
@@ -127,11 +184,14 @@
                         </form>
                       </div>
                     </td>
-                    <td style="width: 65%">
+                    <td style="width: 62%">
                       <span>{{ $t->name }}</span> <br>
                       <span style="font-size: 12px">
-                        <i><a href="{{ route('task_groups.edit',$taskGroup->id) }}" class="group-id">
-                        {{ $taskGroup->name }}</a></i>
+                        <i>
+                          <a href="{{ route('task_groups.edit',$taskGroup->id) }}" class="group-id">
+                            {{ $taskGroup->name }}
+                          </a>
+                        </i>
                       </span>
                     </td>
                     <td style="text-align: end; width: 30px">
@@ -284,7 +344,7 @@
     var priorities = [4, 3, 2, 1];
     priorities.forEach(function(priorityId) {
         if (tasksByPriority[priorityId]) {
-            $('#my-day-table tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 8).append($('<span>').
+            $('#my-day-table tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 10).append($('<span>').
                 addClass('badge bg-' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
             tasksByPriority[priorityId].forEach(function(row) {
                 $('#my-day-table tbody').append(row);
@@ -318,6 +378,13 @@
       }
     }
   });
+
+  // function submitTask(taskId, taskGroupId) {
+  //     var form = document.getElementById('form-' + taskGroupId);
+  //     form.action = form.action + '/' + taskId;
+  //     form.submit();
+  // }
+
 </script>
 
 @endsection
