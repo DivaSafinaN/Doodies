@@ -154,7 +154,7 @@
                     </tr>
                     @endforeach
 
-                    @foreach($myDay as $md)
+                    @foreach($myDay->where('completed', false)->sortBy([['due_date','asc']]) as $md)
                     <tr data-priority="{{ $md->priority_id }}" style="height: 60px">
                       <div style="display: flex; align-items: center;">
                         <td style="width: 3%; justify-content: center"><i class='bx bx-move move'></i></td>
@@ -171,9 +171,9 @@
                           @else
                               none
                           @endif' 
-                          onclick="event.preventDefault(); document.getElementById('form-complete-{{ $md->id }}').submit()"
+                          onclick="event.preventDefault(); document.getElementById('md-complete-{{ $md->id }}').submit()"
                             style="font-size: 20px;"></i>
-                          <form action="{{ route('my_day.complete', $md) }}" id="{{ 'form-complete-'.$md->id }}" 
+                          <form action="{{ route('my_day.complete', $md) }}" id="{{ 'md-complete-'.$md->id }}" 
                             method="POST" style="display: none">
                             @csrf
                             @method('put')

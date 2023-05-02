@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8">
     <title>@yield('title')</title>
-    <link rel="stylesheet" href={{ asset("assets/style.css") }}>
+    <link rel="stylesheet" href={{ asset("assets/style_diva.css") }}>
     <!-- Boxiocns CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     @yield('css')
@@ -18,7 +18,7 @@
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bx-task'></i>
-      <span class="logo_name">Dolistz</span>
+      <span class="logo_name">Doodies</span>
     </div>
     <ul class="nav-links">
       @if(auth()->user()->is_admin)
@@ -145,6 +145,7 @@
   <script src={{ asset("assets/script.js") }}></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
 
   <script>
     function create(){

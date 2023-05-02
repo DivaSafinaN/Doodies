@@ -41,9 +41,9 @@
                         @else
                             none
                         @endif' 
-                        onclick="event.preventDefault(); document.getElementById('form-complete-{{ $md->id }}').submit()"
+                        onclick="event.preventDefault(); document.getElementById('md-complete-{{ $md->id }}').submit()"
                           style="font-size: 20px;"></i>
-                        <form action="{{ route('my_day.complete', $md) }}" id="{{ 'form-complete-'.$md->id }}" 
+                        <form action="{{ route('my_day.complete', $md) }}" id="{{ 'md-complete-'.$md->id }}" 
                           method="POST" style="display: none">
                           @csrf
                           @method('put')

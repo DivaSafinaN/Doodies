@@ -1,17 +1,58 @@
 @extends('index')
 @section('title',  'Edit Password')
 @section('content')
+<link rel="stylesheet" href={{ asset("fonts/material-icon/css/material-design-iconic-font.css") }}>
+<link rel="stylesheet" href={{ asset("css/style_edit.css") }}>
+@if(session()->has('message'))
+<div class="d-flex justify-content-center">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session()->get('message') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+</div>
+@endif
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            @if(session()->has('message'))
-            <div class="mb-2">
-                <strong class="text-success">            
-                    {{ session()->get('message') }}
-                </strong>
+            <div class="card-body my-5">
+                <h3 class="form-title"><strong>Change Password</strong></h3>
+                <form method="POST" id="login-form" action="{{ route('update-password') }}">
+                    @csrf
+                    @method('put')
+                    <div class="form-group">
+                        <label for="your_name"><i class="zmdi zmdi-lock"></i></label>
+                        <input type="password" name="current_password" id="current_password" placeholder="Current Password"
+                        required autocomplete="current_password"/>
+                        @error('current_password')
+                        <div style="color: #dc3545">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="your_pass"><i class="zmdi zmdi-key"></i></label>
+                        <input type="password" name="password" id="password" placeholder="New Password"
+                        required autocomplete="password"/>
+                        @error('password')
+                        <div style="color: #dc3545">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="password-confirm"><i class="zmdi zmdi-key"></i></label>
+                        <input id="password-confirm" type="password" placeholder="Confirm Password"
+                        name="password_confirmation" required autocomplete="new-password">
+                    </div>
+                    
+                    <div class="mt-5">
+                        <button type="submit" class="btn edit-user" style="background: hsl(73, 99%, 73%); 
+                        box-shadow: 0px 0px 10px rgba(0,0,0,0.05);
+                        height: 40px;
+                        width: 100px;
+                        border: #e5e5e5;">
+                            {{ __('Save') }}
+                        </button>
+                </div>
+                </form>
             </div>
-            @endif
-            <div class="card">
+            {{-- <div class="card">
                 <div class="card-header">{{ __('Edit Password') }}</div>
 
                 <div class="card-body">
@@ -66,7 +107,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>
