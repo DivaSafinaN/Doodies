@@ -40,10 +40,12 @@
         </nav>
 
         <!--hero header-->
-        <section class="pt-7 pt-md-8" id="home">
+        <section class="pt-md-6" id="home">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 mx-auto my-auto text-center">
+                        <img src="{{ asset('img/Untitled-1.png') }}" alt=""
+                        style="width: 40rem">
                         <h1>Know your priorities. Keep organized.</h1>
                         <p class="lead mt-4 mb-5">
                             Organize your activities to make your life easier with Doodies.

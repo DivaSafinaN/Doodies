@@ -8,7 +8,6 @@ use App\Http\Controllers\TaskAdditionals;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskGroupController;
 use App\Http\Controllers\UserController;
-use App\Jobs\SendMyDayReminder;
 use App\Mail\MyDayReminder;
 use App\Mail\TaskReminder;
 use App\Models\MyDay;

@@ -50,6 +50,7 @@ class MyDayReminder extends Mailable
                 'name' => $this->myDay->name,
                 'due_date' => $this->myDay->due_date
             ],
+            
         );
     }
 
