@@ -3,14 +3,14 @@
 @section('content')
 <link rel="stylesheet" href={{ asset("fonts/material-icon/css/material-design-iconic-font.css") }}>
 <link rel="stylesheet" href={{ asset("css/style_edit.css") }}>
-@if(session()->has('message'))
+{{-- @if(session()->has('message'))
 <div class="d-flex justify-content-center">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session()->get('message') }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
 </div>
-@endif
+@endif --}}
 <div class="container" style="width: 700px">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -97,4 +97,16 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+<script>
+    @if(session()->has('message'))
+        Swal.fire(
+        'Success!',
+        'Profile has been updated',
+        'success'
+        )
+    @endif
+</script>
 @endsection

@@ -44,10 +44,10 @@
                                 </form>
                             </li>
                             <li class="drop-custom">
-                              <form action="{{ route('task_groups.tasks.delete', [$taskGroup, $t]) }}" method="POST">
+                              <form action="{{ route('task_groups.tasks.delete', [$taskGroup, $t]) }}" method="POST" onsubmit="return submitForm(this)">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none" class="ms-2" id="trash-btn">
                                   <i class='bx bx-trash' style="text-align: center; color: red"></i>
                                     <span class="ms-2 text-danger">Delete</span>
                                 </button>
@@ -92,10 +92,10 @@
                                 </form>
                             </li>
                             <li class="drop-custom">
-                              <form action="{{ route('my_day.delete', $ct) }}" method="POST">
+                              <form action="{{ route('my_day.delete', $ct) }}" method="POST" onsubmit="return submitForm(this)">
                                 @csrf
                                 @method('Delete')
-                                <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none" class="ms-2" id="trash-btn">
                                   <i class='bx bx-trash' style="text-align: end; color: #dc3545"></i>
                                     <span class="ms-2 text-danger">Delete</span>
                                 </button>
@@ -137,6 +137,25 @@
 
 @section('javascript')
 <script>
+  function submitForm(form){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Task will be deleted permanently.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete it.'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      })
+      return false;
+    }
+    // )
+  // }
+
   @if(isset($taskGroup))
     function edit(id){
       $.get('/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' ,function(data){

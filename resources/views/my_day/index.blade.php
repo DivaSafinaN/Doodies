@@ -220,7 +220,7 @@
                             <form action="{{ route('task_groups.tasks.destroy', [$taskGroup, $t]) }}" method="POST">
                               @csrf
                               @method('Delete')
-                              <button type="submit" onclick="return confirm('Are you sure?')" style="border: none; background:none" class="ms-2">
+                              <button type="submit" style="border: none; background:none" class="ms-2">
                                 <i class='bx bx-trash' style="text-align: center"></i>
                                   <span class="ms-1">Delete</span>
                               </button>

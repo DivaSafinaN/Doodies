@@ -414,7 +414,7 @@ body{
   }
 
   .input-data input{
-  padding-left: 10px;
+  margin: 0 15px;
   font-size: 22px;
   font-weight: 600;
   height: 50px;

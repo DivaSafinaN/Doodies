@@ -28,7 +28,7 @@
           <form action="{{ route('admin.delete-user', $u) }}" method="post">
             @csrf
             @method('delete')
-            <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</button>
+            <button type="submit" id="manage-delete" class="btn btn-danger">Delete</button>
           </form>
         </td>
       </tr>
@@ -36,5 +36,27 @@
     </tbody>
   </table>
 
+@endsection
 
+@section('javascript')
+<script>
+  $(document).on('click','#manage-delete', function(e){
+    e.preventDefault();
+    var form = $(this).closest('form');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Data will be deleted permanently.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete it.'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        form.submit();
+      }
+    })
+  })
+</script>
 @endsection

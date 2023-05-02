@@ -12,7 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     {{-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @livewireStyles
    </head>
 <body>
   <div class="sidebar">
@@ -137,14 +136,14 @@
 
   <div class="home-section">
     <div class="home-content">
-      @if ($errors->has('name'))
+      {{-- @if ($errors->has('name'))
         <div class="d-flex justify-content-center">
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
           {{ $errors->first('name') }}
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         </div>
-      @endif
+      @endif --}}
         @yield('content')
     </div> 
   </section>
@@ -153,7 +152,7 @@
   <script src={{ asset("assets/script.js") }}></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     function create(){
@@ -163,9 +162,12 @@
       $("#exampleModal").modal('show');
   });
   }
+  @if ($errors->has('name'))
+    Swal.fire('A task group with that name already exists.')
+  @endif
+
   </script>
   
-  @livewireScripts
   @yield('javascript')
 </body>
 </html>

@@ -25,10 +25,10 @@
         </div>
     </form>
     
-    <form action="{{ route('task_groups.destroy', $taskGroup) }}" method="POST">
+    <form action="{{ route('task_groups.destroy', $taskGroup) }}" method="POST" onsubmit="return list(this)">
         @csrf
         @method('Delete')
-        <button class="btn btn-danger delete" type="submit" onclick="return confirm('Are you sure?')">
+        <button class="btn btn-danger delete" type="submit">
             {{ __('Delete') }}
         </button>
     </form>
@@ -320,6 +320,23 @@ resizeInput.call(input); // immediately call the function
 
 function resizeInput() {
   this.style.width = this.value.length + "ch";
+}
+
+function list(form){
+  Swal.fire({
+        title: 'Are you sure?',
+        text: "All tasks will be deleted permanently.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Delete it.'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      })
+      return false;
 }
 
 function edit(id){
