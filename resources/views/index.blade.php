@@ -17,7 +17,7 @@
 <body>
   <div class="sidebar">
     <div class="logo-details">
-      <i class='bx bx-task'></i>
+      <img src="{{ asset("img/logo_1.png") }}" alt="" class="logo_img">
       <span class="logo_name">Doodies</span>
     </div>
     <ul class="nav-links">
@@ -137,6 +137,14 @@
 
   <div class="home-section">
     <div class="home-content">
+      @if ($errors->has('name'))
+        <div class="d-flex justify-content-center">
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ $errors->first('name') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        </div>
+      @endif
         @yield('content')
     </div> 
   </section>

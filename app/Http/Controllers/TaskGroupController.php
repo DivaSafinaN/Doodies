@@ -39,6 +39,12 @@ class TaskGroupController extends Controller
     public function store(TaskGroupRequest $request)
     {
         $validatedData = $request->validated();
+        $user = auth()->user();
+
+    // Check if a task group with the same name already exists for the user
+        if ($user->taskGroup()->where('name', $validatedData['name'])->exists()) {
+            return redirect()->back()->withErrors(['name' => 'A task group with that name already exists.']);
+        }
         $validatedData['user_id'] = auth()->user()->id;
 
         TaskGroup::create($validatedData);
