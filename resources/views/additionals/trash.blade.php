@@ -1,11 +1,11 @@
 @extends('index')
 @section('title',  'Trash' )
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="text-align: center">
     <span class="text">Trash</span> <br>
     <span style="font-size: 17px">Tasks will be deleted permanently after 3 days.</span>
 </div>
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3" style="display: flex; justify-content: center">
     <div class="col-md-10">
       <div class="card-hover-shadow-2x mb-3 card">
         <div class="scroll-area-sm">

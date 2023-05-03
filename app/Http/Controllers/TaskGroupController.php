@@ -48,7 +48,7 @@ class TaskGroupController extends Controller
         $validatedData['user_id'] = auth()->user()->id;
 
         TaskGroup::create($validatedData);
-        return redirect('my_day');
+        return back()->with('message','New Task List has created.');
     }
     /**
      * Show the form for editing the specified resource.

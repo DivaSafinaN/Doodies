@@ -1,10 +1,10 @@
 @extends('index')
 @section('title',  'Completed Task' )
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="text-align: center">
     <span class="text">Completed Tasks</span>
 </div>
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3" style="display: flex; justify-content: center">
     <div class="col-md-10">
       <div class="card-hover-shadow-2x mb-3 card">
         <div class="scroll-area-sm">

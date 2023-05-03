@@ -11,6 +11,6 @@ Due Date: {{ \Carbon\Carbon::parse($due_date)->format('d M Y')}}
 Button Text
 </x-mail::button> --}}
 
-Thanks,<br>
-{{ config('app.name') }}
+Thank you for using Doodies.<br>
+Doodies Team.
 </x-mail::message>

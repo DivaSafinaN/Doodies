@@ -12,5 +12,6 @@ Button Text
 </x-mail::button> --}}
 
 Thank you for using Doodies.<br>
+Doodies Team.
 {{-- {{ config('app.name') }} --}}
 </x-mail::message>

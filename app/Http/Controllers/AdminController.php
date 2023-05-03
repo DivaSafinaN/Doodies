@@ -23,6 +23,6 @@ class AdminController extends Controller
         $this->middleware('is_admin');
         
         $user->forceDelete();
-        return redirect()->back();
+        return back()->with('message','User has been deleted.');
     }
 }

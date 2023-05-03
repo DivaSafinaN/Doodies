@@ -58,5 +58,13 @@
       }
     })
   })
+
+  @if (session()->has('message'))
+    Swal.fire(
+      'Success!',
+      'User has been deleted.',
+      'success'
+    )
+  @endif
 </script>
 @endsection

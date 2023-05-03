@@ -42,7 +42,7 @@
                     </div>
                     
                     <div class="mt-5">
-                        <button type="submit" class="btn edit-user" style="background: hsl(73, 99%, 73%); 
+                        <button type="submit" class="btn edit-user" style="background: #d3f369; 
                         box-shadow: 0px 0px 10px rgba(0,0,0,0.05);
                         height: 40px;
                         width: 100px;

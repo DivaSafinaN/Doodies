@@ -9,10 +9,30 @@
   .table tbody td .my-day-link:hover{
     text-decoration: underline;
   }
+  .badge.custom-danger{
+    background: #f3cccf;
+    color: #cd2131;
+    font-weight: 500;
+  }
+  .badge.custom-warning{
+    background: #ffecb4;
+    color: #997304;
+    font-weight: 500;
+  }
+  .badge.custom-primary{
+    background: #b2d7ff;
+    color: #0062cc;
+    font-weight: 500;
+  }
+  .badge.custom-none{
+    background: #e5e5e5;
+    color: #555555;
+    font-weight: 500;
+  }
 </style>
 @endsection
 @section('content')
-<div class="taskgroup-wrap d-flex">
+<div class="taskgroup-wrap d-flex justify-content-center">
     <form action="{{ route('task_groups.update', $taskGroup) }}" method="post">
         @method('PUT')
         @csrf
@@ -34,7 +54,7 @@
     </form>
 </div>
 
-<div class="container-fluid mt-3">
+<div class="container-fluid mt-3 d-flex justify-content-center">
     <div class="col-md-10">
       <div class="card-hover-shadow-2x mb-3 card">
         <div class="scroll-area-sm">
@@ -82,19 +102,22 @@
                         </a>
                         @endif
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($t->file)
-                        <i class='bx bx-link-alt'style="color: lightgray"></i>
+                        <i class='bx bx-link-alt'style="color: #4c004c;background: #e5cce5;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($t->notes)
-                        <i class='bx bx-note'style="color: lightgray"></i>
+                        <i class='bx bx-note'style="color: #66102f;background: #ffd4e3;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($t->reminder)
-                        <i class='bx bx-alarm' style="color: lightgray"></i>
+                        <i class='bx bx-alarm' style="color: #50002f;background: #f4cce3;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
                       <td style="padding-top: 10px;">
@@ -187,19 +210,22 @@
                           <span style="font-size: 12px">My Day</span>
                         </a>
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($md->file)
-                        <i class='bx bx-link-alt'style="color: lightgray"></i>
+                        <i class='bx bx-link-alt'style="color: #4c004c;background: #e5cce5;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($md->notes)
-                        <i class='bx bx-note' style="color: lightgray"></i>
+                        <i class='bx bx-note' style="color: #66102f;background: #ffd4e3;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
-                      <td style="text-align: end; width: 30px">
+                      <td style="text-align: end; ">
                         @if($md->reminder)
-                        <i class='bx bx-alarm' style="color: lightgray"></i>
+                        <i class='bx bx-alarm' style="color: #50002f;background: #f4cce3;
+                        padding: 3px;border-radius: 7px;"></i>
                         @endif
                       </td>
                       <td style="padding-top: 10px;">
@@ -372,7 +398,7 @@ function editMD(id){
     priorities.forEach(function(priorityId) {
         if (tasksByPriority[priorityId]) {
             $('#group tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 10).append($('<span>').
-                addClass('badge bg-' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
+                addClass('badge ' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
             tasksByPriority[priorityId].forEach(function(row) {
                 $('#group tbody').append(row);
             });
@@ -395,13 +421,13 @@ function editMD(id){
     function getPriorityColor(priorityId) {
       switch (priorityId) {
         default:
-          return 'light text-dark';
+          return 'custom-none';
         case 2:
-          return 'primary';
+          return 'custom-primary';
         case 3:
-          return 'warning';
+          return 'custom-warning';
         case 4:
-          return 'danger';
+          return 'custom-danger';
       }
     }
   });

@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    </head>
 <body>
-  <div class="sidebar">
+  <div class="close sidebar">
     <div class="logo-details">
       <img src="{{ asset("img/logo_1.png") }}" alt="" class="logo_img">
       <span class="logo_name">Doodies</span>
@@ -23,7 +23,7 @@
       @if(auth()->user()->is_admin)
       <li>
         <a href="/manage-user" class="custombtn">
-          <i class='bx bx-user-circle'></i>
+          <i class='bx bx-user-circle' style="color: #252629"></i>
           <span class="link_name">Manage User</span>
         </a>
       </li>
@@ -35,7 +35,7 @@
         </a>
       </li>
       <div style="display: flex; justify-content: center; margin-top: -5px">
-          <hr style="color: #fff; width: 230px">
+          <hr style="color: #62625e; width: 230px">
       </div>
       <p class="sub-title">
         <span class="link_name">
@@ -45,7 +45,7 @@
             <i class='bx bx-plus' style="font-size: 15px; font-weight: 600"></i>
         </button>
       </p>
-
+      
       @foreach(App\Models\TaskGroup::where('user_id', Auth::id())->get() as $group)
       <li>
         <a href="{{ route('task_groups.edit',$group->id) }}" class="custombtn">
@@ -56,7 +56,7 @@
       @endforeach
 
       <div style="display: flex; justify-content: center; margin-top: -5px">
-        <hr style="color: #fff; width: 230px">
+        <hr style="color: #62625e; width: 230px">
       </div>
 
       <li>
@@ -75,7 +75,7 @@
 </ul>
 </div>
 <!-- Home Section -->
-<nav class="navbar navbar-expand-lg navclass" style="padding: 12px; background: #fff;">
+<nav class="navbar navbar-expand-lg navclass" style="padding: 12px; background: #f9faf5;">
   <i class='bx bx-menu'></i>
   <div class="container-fluid">
     
@@ -87,16 +87,18 @@
       <ul class="navbar-nav ms-auto ">
         @include('search')
         <li class="nav-item mx-4">
-          <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d6fe43&rounded=true" 
+          <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d3f369&rounded=true" 
           class="user-pic" onclick="toggleMenu()">
             <div class="profile" id="Profile">
               <div class="sub-profile">
                 <div class="user-info">
-                  <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d6fe43&rounded=true" >
+                  <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d3f369&rounded=true" >
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
-                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' style="font-size: 15px;color:blue"></i></a> | 
-                        <a href="{{ route('edit-password') }}" style="color:blue">Change Password</a></span>
+                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' 
+                        style="font-size: 15px;color: #54612a;background: #e9f9b4;padding: 2px;border-radius: 6px;"></i></a> | 
+                        <a href="{{ route('edit-password') }}" 
+                        style="color: #54612a;background: #e9f9b4;padding: 4px;border-radius: 35px;">Change Password</a></span>
                     </p>
                 </div>
                 <hr>
@@ -120,7 +122,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
+    <div class="modal-content" style="background: #f9faf5">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -164,6 +166,14 @@
   }
   @if ($errors->has('name'))
     Swal.fire('A task group with that name already exists.')
+  @endif
+
+  @if (session()->has('message'))
+    Swal.fire(
+      'Success!',
+      'New Task List has been created.',
+      'success'
+    )
   @endif
 
   </script>

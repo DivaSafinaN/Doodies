@@ -69,7 +69,7 @@
     <label for="exampleFormControlTextarea1">Notes :</label>
     <textarea class="form-control" id="notes" name="notes">{{ $task->notes }}</textarea>
 </div>
-<button type="submit" class="btn btn-primary my-3" style="width: fit-content">Save</button>
+<button type="submit" class="btn my-3" style="width: fit-content; background: #d3f369">Save</button>
 </form>
 </div>
 
