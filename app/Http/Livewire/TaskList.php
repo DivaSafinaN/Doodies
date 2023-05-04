@@ -9,20 +9,21 @@ use Livewire\Component;
 
 class TaskList extends Component
 {
-    public $taskGroup;
-    public $myDay;
-
-    public function mount(TaskGroup $taskGroup)
-    {
-        $this->taskGroup = $taskGroup;
-        $this->myDay = MyDay::where('task_group_id', $taskGroup->id)->get();
-    }
+    public $message = '';
+    public $user_id = 42;
 
     public function render()
     {
-        
         return view('livewire.task-list');
     }
 
-    
+    public function callFunction()
+    {
+        $this->message = "You clicked on button";
+    }
+
+    public function callFunctionArg($user_id)
+    {
+        $this->message = $user_id;
+    }
 }

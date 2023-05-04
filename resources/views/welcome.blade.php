@@ -19,7 +19,7 @@
     <body>
 
         <!--navigation-->
-        <nav class="navbar navbar-expand-md navbar-light bg-white fixed-top sticky-navigation">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top sticky-navigation" style="background: #f9faf5">
             <a class="navbar-brand mx-auto" href="/">
                 Doodies
             </a>

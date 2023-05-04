@@ -25,6 +25,6 @@ class SearchController extends Controller
         ->where('completed', false)
         ->get();
 
-        return view('search-results', compact('tasks', 'myDays'));
+        return view('search-results', compact('tasks', 'myDays','q'));
     }
 }

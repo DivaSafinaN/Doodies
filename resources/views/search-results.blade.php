@@ -20,7 +20,7 @@
   }
 </style>
 @endsection
-<h5>Search Results:</h5>
+<h5>Search Results for "{{ $q }}"</h5>
 
 
 <div class="container-fluid mt-3">

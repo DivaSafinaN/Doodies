@@ -56,8 +56,13 @@
 
 <div class="container-fluid mt-3 d-flex justify-content-center">
     <div class="col-md-10">
+
       <div class="card-hover-shadow-2x mb-3 card">
         <div class="scroll-area-sm">
+          @php
+            $taskDisplayed = false;
+          @endphp
+
           <perfect-scrollbar class="ps-show-limits">
             <div style="position: static;" class="ps ps--active-y">
               <div class="ps-content">
@@ -135,12 +140,12 @@
                           <a class="dropdown"type="button"data-bs-toggle="dropdown" style="color: black">
                           <i class='bx bx-dots-vertical-rounded'></i>
                           </a>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon" style="width: 200px">
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
                             <li class="drop-custom">
                               <form action="{{ route('task_groups.tasks.destroy', [$taskGroup, $t]) }}" method="POST">
                                 @csrf
                                 @method('Delete')
-                                <button type="submit" style="border: none; background:none" class="ms-2">
+                                <button type="submit" style="border: none; background:none;" class="ms-2">
                                   <i class='bx bx-trash' style="text-align: center"></i>
                                     <span class="ms-1">Delete</span>
                                 </button>
@@ -174,6 +179,9 @@
                           </ul>
                         </div>
                       </td>
+                    @php
+                      $taskDisplayed = true;
+                    @endphp
                     </tr>
                     @endforeach
 
@@ -295,6 +303,9 @@
                           </ul>
                         </div>
                       </td>
+                    @php
+                      $taskDisplayed = true;
+                    @endphp
                     </tr>
                     @endforeach
                   </tbody>
@@ -303,6 +314,17 @@
               
             </div>
           </perfect-scrollbar>
+
+          @if(!$taskDisplayed)
+          <div class="scroll-area d-flex justify-content-center align-items-center flex-column mt-5">
+            <img src="{{ asset("img/tasklist.png") }}" style="width:270px">
+              <span style="text-align: center; font-size: 20px; color: #a8bbbf">
+                A well-planned task list can be the key to <br>
+                a productive and successful day. 
+              </span>
+              
+          </div>
+          @endif
         </div>
 
         <div class="d-block text-right card-footer">

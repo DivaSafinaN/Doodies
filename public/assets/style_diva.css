@@ -608,7 +608,7 @@ body{
     color: #332259;
     background: #e5ddf8;
     border-radius: 10px;
-    width: auto;
+    width: 50px;
     font-size: 11px;
     display: flex; 
     justify-content: center;

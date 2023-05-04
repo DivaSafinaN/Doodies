@@ -42,6 +42,10 @@
   <div class="col-md-10">
     <div class="card-hover-shadow-2x mb-3 card">
       <div class="scroll-area-sm">
+        @php
+            $taskDisplayed = false;
+          @endphp
+
         <perfect-scrollbar class="ps-show-limits">
           <div style="position: static;" class="ps ps--active-y">
             <div class="ps-content">
@@ -171,6 +175,9 @@
                         </ul>
                       </div>
                     </td>
+                    @php
+                      $taskDisplayed = true;
+                    @endphp
                   </tr>
                   @endforeach
 
@@ -283,6 +290,9 @@
                         </ul>
                       </div>
                     </td>
+                    @php
+                      $taskDisplayed = true;
+                    @endphp
                   </tr>
                   @endforeach
                   @endforeach
@@ -293,6 +303,18 @@
             
           </div>
         </perfect-scrollbar>
+
+        @if(!$taskDisplayed)
+          <div class="scroll-area d-flex justify-content-center align-items-center flex-column mt-5">
+            <img src="{{ asset("img/8264.jpg") }}" style="width:350px">
+              <span style="text-align: center; font-size: 20px; color: #a8bbbf">
+                Take control of your day by prioritizing your <br>
+                tasks and staying focused. 
+              </span>
+              
+          </div>
+          @endif
+
       </div>
       <div class="d-block text-right card-footer">
         <form action="{{ route('my_day.store') }}" method="post" class="row g-3">
@@ -327,8 +349,6 @@
 </div>
 
 @endsection
-{{-- '{{ route("task_groups.tasks.edit", ["task_group" => $taskGroup->id, "task" => $id]) }}'
-/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' --}}
 @section('javascript')
 <script>
   @if(isset($taskGroup))
