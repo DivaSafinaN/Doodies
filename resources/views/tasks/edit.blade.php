@@ -17,10 +17,10 @@
 </style>
 
 <div class="col">
-<form action="{{ route('task_groups.tasks.update', [$taskGroup, $task]) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('tasks.update', $task) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
-<h5><input class="form-control" type="text" name="name" id="name" value="{{ $task->name }}"></h5>
+<h5><input class="form-control" type="text" name="name" id="name" value="{{ $task->name }}" required autocomplete="name"></h5>
 <select class="form-select" style="width: auto" name="priority_id" id="priority_id">
   @foreach($priority as $p)
   <option value="{{ $p->id }}" {{ $task->priority_id == $p->id ? 'selected' : '' }}>
@@ -53,12 +53,12 @@
         <i class='bx bx-link-alt'></i>Attach File</label>
         @if ($task->file)
             <div class="mb-2 files">
-                <a href="{{ asset('file/' . $task->file) }}" target="_blank">{{ $task->file }}</a>
+                <a href="{{ asset('storage/file/'.$task->file) }}" target="_blank">{{ $task->file }}</a>
                   <button type="submit" class="btn filebtn text-danger"
                   onclick="event.preventDefault(); document.getElementById('fileT-{{ $task->id }}').submit()">Delete</button>
             </div>
             <form style="visibility: hidden"></form>
-            <form action="{{ route('task_groups.tasks.fileTgone', [$taskGroup, $task]) }}" 
+            <form action="{{ route('tasks.fileTgone', $task) }}" 
             method="post" id="{{ 'fileT-'.$task->id }}">@csrf @method('put')</form>
             @else
             <input class="form-control" type="file" id="file" name="file">

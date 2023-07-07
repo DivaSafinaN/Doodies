@@ -30,7 +30,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="your_name"><i class="zmdi zmdi-email"></i></label>
-                        <input type="text" name="email" id="your_name" placeholder="Your Email"/>
+                        <input type="text" name="email" id="your_name" placeholder="Your Email" value="{{ old('email')}}"/>
                         @error('email')
                         <div style="color: #dc3545">{{ $message }}</div>
                         @enderror

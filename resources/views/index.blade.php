@@ -29,7 +29,7 @@
       </li>
       @else
       <li>
-        <a href="/my_day" class="custombtn">
+        <a href="/tasks" class="custombtn" title="My Day">
           <i class='bx bx-sun'></i>
           <span class="link_name">My Day</span>
         </a>
@@ -48,7 +48,7 @@
       
       @foreach(App\Models\TaskGroup::where('user_id', Auth::id())->get() as $group)
       <li>
-        <a href="{{ route('task_groups.edit',$group->id) }}" class="custombtn">
+        <a href="{{ route('task_groups.edit',$group->id) }}" class="custombtn" title="{{ $group->name }}">
             <i class='bx bx-list-ul'></i>
             <span class="link_name">{{ $group->name }}</span>
         </a>
@@ -60,13 +60,13 @@
       </div>
 
       <li>
-        <a href="/completed_tasks" class="custombtn">
+        <a href="/completed_tasks" class="custombtn" title="Completed">
           <i class='bx bxs-check-square'></i>          
           <span class="link_name">Completed</span>
         </a>
       </li>
       <li>
-        <a href="/trash" class="custombtn">
+        <a href="/trash" class="custombtn" title="Trash">
           <i class='bx bx-trash'></i>
           <span class="link_name">Trash</span>
         </a>
@@ -88,14 +88,14 @@
         @include('search')
         <li class="nav-item mx-4">
           <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d3f369&rounded=true" 
-          class="user-pic" onclick="toggleMenu()">
+          class="user-pic" onclick="toggleMenu()" title="Profile">
             <div class="profile" id="Profile">
               <div class="sub-profile">
                 <div class="user-info">
                   <img src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->name) }}&background=d3f369&rounded=true" >
                     <p>{{ Auth::user()->name }}
                       <span>{{ Auth::user()->email }}</span>
-                      <span><a href="{{ route('edit-profile') }}"><i class='bx bx-edit' 
+                      <span><a href="{{ route('edit-profile') }}" title="Edit Profile"><i class='bx bx-edit' 
                         style="font-size: 15px;color: #54612a;background: #e9f9b4;padding: 2px;border-radius: 6px;"></i></a> | 
                         <a href="{{ route('edit-password') }}" 
                         style="color: #54612a;background: #e9f9b4;padding: 4px;border-radius: 35px;">Change Password</a></span>
@@ -121,7 +121,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
@@ -138,24 +138,17 @@
 
   <div class="home-section">
     <div class="home-content">
-      {{-- @if ($errors->has('name'))
-        <div class="d-flex justify-content-center">
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          {{ $errors->first('name') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        </div>
-      @endif --}}
         @yield('content')
     </div> 
   </section>
+  @livewireScripts
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
   <script src={{ asset("assets/script.js") }}></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+  <script src="https://cdn.jsdelivr.net/gh/livewire/sortable@v0.x.x/dist/livewire-sortable.js"></script>
   <script>
     function create(){
       $.get('/task_groups/create' ,function(data){
@@ -164,7 +157,8 @@
       $("#exampleModal").modal('show');
   });
   }
-  @if ($errors->has('name'))
+
+  @if ($errors->has('TG_name'))
     Swal.fire('A task group with that name already exists.')
   @endif
 

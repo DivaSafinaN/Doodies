@@ -14,7 +14,7 @@ class AdminController extends Controller
                     ->whereNotNull('last_seen')
                     ->where('is_admin',0)
                     ->orderBy('last_seen', 'DESC')
-                    ->get();
+                    ->paginate(8);
 
         return view('admin.manage', compact('user'));
     }

@@ -36,6 +36,11 @@
     </tbody>
   </table>
 
+  <div class="d-flex justify-content-center">
+    {{ $user->links() }}
+  </div>
+
+
 @endsection
 
 @section('javascript')

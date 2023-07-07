@@ -17,7 +17,7 @@
               <div class="ps-content">
                 <table class="table">
                     <tbody>
-                      @foreach($taskGroups as $taskGroup)
+                      {{-- @foreach($taskGroups as $taskGroup)
                       @foreach($taskGroup->tasks->sortBy([['deleted_at','desc']]) as $t)
                       @if ($t->deleted_at)
                       <tr>
@@ -70,11 +70,11 @@
                       </tr>
                       @endif
                       @endforeach
-                        @endforeach
-                    </tbody>
+                        @endforeach --}}
+                    {{-- </tbody>
 
-                    <tbody>
-                      @foreach($myDayTasks->sortBy([['deleted_at','desc']]) as $ct)
+                    <tbody> --}}
+                      @foreach($tasks->sortBy([['deleted_at','desc']]) as $ct)
                       <tr>
                         <div style="display: flex; align-items: center">
                           <td style="width: 3%;"><i class='bx bx-move move'></i></td>
@@ -96,7 +96,7 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
                               <li class="drop-custom">
-                                <form action="{{ route('my_day.restore', $ct) }}" method="POST">
+                                <form action="{{ route('tasks.restore', $ct) }}" method="POST">
                                   @csrf
                                   @method('put')
                                   <button type="submit" style="border: none; background:none" class="ms-2">
@@ -106,7 +106,7 @@
                                   </form>
                               </li>
                               <li class="drop-custom">
-                                <form action="{{ route('my_day.delete', $ct) }}" method="POST" onsubmit="return submitForm(this)">
+                                <form action="{{ route('tasks.delete', $ct) }}" method="POST" onsubmit="return submitForm(this)">
                                   @csrf
                                   @method('Delete')
                                   <button type="submit" style="border: none; background:none" class="ms-2" id="trash-btn">

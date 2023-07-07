@@ -13,18 +13,18 @@ class SearchController extends Controller
     {
         $q = $request->input('q');
         
-        $tasks = Task::with('taskGroup')
-        ->where('name', 'like', '%'.$q.'%')
-        ->where('completed', false)
-        ->whereHas('taskGroup', function ($q) {
-            $q->where('user_id', Auth::id());
-        })
-        ->get();
-        $myDays = MyDay::where('name', 'like', '%'.$q.'%')
+        // $tasks = Task::with('taskGroup')
+        // ->where('name', 'like', '%'.$q.'%')
+        // ->where('completed', false)
+        // ->whereHas('taskGroup', function ($q) {
+        //     $q->where('user_id', Auth::id());
+        // })
+        // ->get();
+        $tasks = Task::where('name', 'like', '%'.$q.'%')
         ->where('user_id', Auth::id())
         ->where('completed', false)
         ->get();
 
-        return view('search-results', compact('tasks', 'myDays','q'));
+        return view('search-results', compact('tasks','q'));
     }
 }

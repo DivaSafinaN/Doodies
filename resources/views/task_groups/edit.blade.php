@@ -91,7 +91,7 @@
                           @endif' 
                           onclick="event.preventDefault(); document.getElementById('form-complete-{{ $t->id }}').submit()"
                             style="font-size: 20px;"></i>
-                          <form action="{{ route('task_groups.tasks.complete', [$taskGroup, $t]) }}" id="{{ 'form-complete-'.$t->id }}" 
+                          <form action="{{ route('tasks.complete', $t) }}" id="{{ 'form-complete-'.$t->id }}" 
                             method="POST" style="display: none">
                             @csrf
                             @method('put')
@@ -101,7 +101,7 @@
                       <td style="width: 62%;">
                         <span>{{ $t->name }} </span> <br>
                         @if($t->add_to_myday)
-                        <a href="/my_day" class="my-day-link">
+                        <a href="/tasks" class="my-day-link">
                         <i class='bx bx-sun' style="color: darkblue;font-size: 12px"></i>
                         <span style="font-size: 12px">My Day</span>
                         </a>
@@ -133,16 +133,16 @@
                         </div>
                       </td>
                       <td style="width: 5%; text-align: end;">
-                        <button class="editbtn" onclick="edit({{ $t->id }})"><i class='bx bx-edit'></i></button>
+                        <button class="editbtn" onclick="edit({{ $t->id }})" title="Edit Task"><i class='bx bx-edit'></i></button>
                       </td>
                       <td style="width: 5%; text-align: center;">
                         <div class="dropdown">
                           <a class="dropdown"type="button"data-bs-toggle="dropdown" style="color: black">
                           <i class='bx bx-dots-vertical-rounded'></i>
                           </a>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon" style="width: 180px">
                             <li class="drop-custom">
-                              <form action="{{ route('task_groups.tasks.destroy', [$taskGroup, $t]) }}" method="POST">
+                              <form action="{{ route('tasks.destroy', $t) }}" method="POST">
                                 @csrf
                                 @method('Delete')
                                 <button type="submit" style="border: none; background:none;" class="ms-2">
@@ -158,7 +158,7 @@
                                 <i class='bx bx-x ms-2'></i>
                                 <span class="ms-1">Added to My Day</span>
                               </button>
-                              <form action="{{ route('task_groups.tasks.removefrmyday',[$taskGroup, $t]) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
+                              <form action="{{ route('tasks.removefrmyday',$t) }}" id="{{ 'remove-fr-md-'.$t->id }}" 
                                 method="POST" style="display: none">
                                 @csrf
                                 @method('delete')
@@ -169,137 +169,36 @@
                                 <i class='bx bx-sun ms-2' style="text-align: center;"></i>
                                 <span class="ms-1">Add to My Day</span>
                               </button>
-                              <form action="{{ route('task_groups.tasks.addtomyday',[$taskGroup, $t]) }}" id="{{ 'add-to-md-'.$t->id }}" 
+                              <form action="{{ route('tasks.addtomyday', $t) }}" id="{{ 'add-to-md-'.$t->id }}" 
                                 method="POST" style="display: none">
                                 @csrf
                                 @method('put')
                               </form>
                               @endif
                             </li>
-                          </ul>
-                        </div>
-                      </td>
-                    @php
-                      $taskDisplayed = true;
-                    @endphp
-                    </tr>
-                    @endforeach
 
-                    @foreach($myDay->where('completed', false)->sortBy([['due_date','asc']]) as $md)
-                    <tr data-priority="{{ $md->priority_id }}" style="height: 60px">
-                      <div style="display: flex; align-items: center;">
-                        <td style="width: 3%; justify-content: center"><i class='bx bx-move move'></i></td>
-                      </div>
-                      <td style="width: 5%;">
-                        <div style="display: flex; align-items: center">
-                          <i class='bx bx-circle checkcol
-                          @if($md->priority_id == 4)
-                              high
-                          @elseif($md->priority_id == 3)
-                              medium
-                          @elseif($md->priority_id == 2)
-                              low
-                          @else
-                              none
-                          @endif' 
-                          onclick="event.preventDefault(); document.getElementById('md-complete-{{ $md->id }}').submit()"
-                            style="font-size: 20px;"></i>
-                          <form action="{{ route('my_day.complete', $md) }}" id="{{ 'md-complete-'.$md->id }}" 
-                            method="POST" style="display: none">
-                            @csrf
-                            @method('put')
-                          </form>
-                        </div>
-                      </td>
-                      <td style="width: 62%;">
-                        <span>{{ $md->name }}</span> <br>
-                        <a href="/my_day" class="my-day-link">
-                          <i class='bx bx-sun' style="color: darkblue;font-size: 12px"></i>
-                          <span style="font-size: 12px">My Day</span>
-                        </a>
-                      </td>
-                      <td style="text-align: end; ">
-                        @if($md->file)
-                        <i class='bx bx-link-alt'style="color: #4c004c;background: #e5cce5;
-                        padding: 3px;border-radius: 7px;"></i>
-                        @endif
-                      </td>
-                      <td style="text-align: end; ">
-                        @if($md->notes)
-                        <i class='bx bx-note' style="color: #66102f;background: #ffd4e3;
-                        padding: 3px;border-radius: 7px;"></i>
-                        @endif
-                      </td>
-                      <td style="text-align: end; ">
-                        @if($md->reminder)
-                        <i class='bx bx-alarm' style="color: #50002f;background: #f4cce3;
-                        padding: 3px;border-radius: 7px;"></i>
-                        @endif
-                      </td>
-                      <td style="padding-top: 10px;">
-                        <div class="duedate">
-                          @if ($md->due_date)
-                          <span>{{ \Carbon\Carbon::parse($md->due_date)->format('d M')}}</span>
-                          @endif
-                        </div>
-                      </td>
-                      <td style="width: 5%; text-align: end;">
-                        <button class="editbtn" onclick="editMD({{ $md->id }})"><i class='bx bx-edit'></i></button>
-                      </td>
-                      <td style="width: 5%; text-align: center;">
-                        <div class="dropdown">
-                          <a class="dropdown"type="button"data-bs-toggle="dropdown" style="color: black">
-                          <i class='bx bx-dots-vertical-rounded'></i>
-                          </a>
-                          <ul class="dropdown-menu" aria-labelledby="dropdownMenuicon">
+
+                          <li><hr class="dropdown-divider"></li>
+                          <li class="my-2">
+                            <span class="ms-3">Move task to: </span>
+                          </li>
+                          
+                            @foreach($tGs as $tG)
                             <li class="drop-custom">
-                              <form action="{{ route('my_day.destroy', $md) }}" method="POST">
-                                @csrf
-                                @method('Delete')
-                                <button type="submit" style="border: none; background:none" class="ms-2">
-                                  <i class='bx bx-trash' style="text-align: center"></i>
-                                    <span class="ms-2">Delete</span>
-                                </button>
-                                </form>
-                            </li>
-                            
-                            <li><hr class="dropdown-divider"></li>
-                            <li class="my-2">
-                              <span class="ms-3">Add task to: </span>
-                            </li>
-                            @foreach(App\Models\TaskGroup::where('user_id', auth()->id())->get() as $tG)
-                            <li class="drop-custom">
-                              <button onclick="event.preventDefault(); document.getElementById('add-{{ $md->id }}-to-tg-{{ $tG->id }}').submit()"
+                              <button onclick="event.preventDefault(); document.getElementById('add-{{ $t->id }}-to-tg-{{ $tG->id }}').submit()"
                               style="border: none; background:none; width: 140px; display:flex" class="ms-2">
                                   <span class="ms-2" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis">
                                     {{ $tG->name }}  
                                   </span>
                               </button>
-                              <form id="{{ 'add-'.$md->id.'-to-tg-'.$tG->id }}" action="{{ route('my_day.no-taskgroup', $md) }}" method="POST" style="display: none;">
+                              <form id="{{ 'add-'.$t->id.'-to-tg-'.$tG->id }}" action="{{ route('tasks.to-taskgroup', $t) }}" method="POST" style="display: none;">
                                 @csrf
                                 @method('put')
                                 <input type="hidden" name="task_group_id" value="{{ $tG->id }}">
                               </form>
                             </li>
                             @endforeach
-
-                            @if($md->task_group_id)
-                            <li class="drop-custom">
-                              <button style="color: #dc3545;border: none;background: none"
-                              onclick="event.preventDefault(); document.getElementById('remove-{{ $md->id }}-fr-{{ $taskGroup->id }}').submit()">
-                                <i class='bx bx-x ms-2'></i>
-                                <span class="ms-3">Remove </span>
-                              </button>
-                              <form action="{{ route('my_day.no-taskgroup', $md) }}" id="{{ 'remove-'.$md->id.'-fr-'.$taskGroup->id }}" 
-                                method="POST" style="display: none">
-                                @csrf
-                                @method('delete')
-                                <input type="hidden" name="task_group_id" value="{{ $taskGroup->id }}">
-                                <input type="hidden" name="id" value="{{ $md->id }}">
-                              </form>
-                            </li>
-                            @endif
-                            
+              
                           </ul>
                         </div>
                       </td>
@@ -308,6 +207,7 @@
                     @endphp
                     </tr>
                     @endforeach
+
                   </tbody>
                 </table>
               </div>
@@ -328,10 +228,12 @@
         </div>
 
         <div class="d-block text-right card-footer">
-          <form action="{{ route('task_groups.tasks.store',$taskGroup) }}" method="post" class="row g-3">
+          <form action="{{ route('tasks.store_inTG',$taskGroup) }}" method="post" class="row g-3">
             @csrf
             <div class="col">
-            <input type="text" class="form-control input" placeholder="ex: Homework" name="name" >
+            <input type="hidden" name="task_group_id" value="{{ $taskGroup->id }}">
+            <input type="hidden" name="add_to_myday" value="0">
+            <input type="text" class="form-control input" placeholder="ex: Homework" name="name" required autocomplete="name">
             </div>
             <div class="col-auto">
             <button type="submit" class="btn btn-dark">Add Task</button>
@@ -343,116 +245,98 @@
     </div>
 
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div id="page"></div>
-      </div>
-    </div>
-  </div>
-</div>
 
 @endsection
 
 @section('javascript')
-<script>
-var input = document.querySelector('.input-title'); // get the input element
-input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
-resizeInput.call(input); // immediately call the function
+  <script>
+  @if ($errors->has('TG_name'))
+    Swal.fire('A task group with that name already exists.')
+  @endif
 
-function resizeInput() {
-  this.style.width = this.value.length + "ch";
-}
+  var input = document.querySelector('.input-title'); // get the input element
+  input.addEventListener('input', resizeInput); // bind the "resizeInput" callback on "input" event
+  resizeInput.call(input); // immediately call the function
 
-function list(form){
-  Swal.fire({
-        title: 'Are you sure?',
-        text: "All tasks will be deleted permanently.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Delete it.'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          form.submit();
+  function resizeInput() {
+    this.style.width = this.value.length + "ch";
+  }
+
+  function list(form){
+    Swal.fire({
+          title: 'Are you sure?',
+          text: "All tasks will be deleted permanently.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, Delete it.'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            form.submit();
+          }
+        })
+        return false;
+  }
+
+  function edit(id){
+    $.get('/tasks/' + id + '/edit' ,function(data){
+      $("#exampleModalLabel").html('Edit Task');
+      $("#page").html(data);
+      $("#exampleModal").modal('show');
+    });
+  }
+
+    $(document).ready(function() {
+      // Group tasks by priority
+      var tasksByPriority = {};
+      $('#group tbody tr').each(function() {
+          var priorityId = $(this).data('priority');
+          var task = $(this).get(0);
+          if (!tasksByPriority[priorityId]) {
+              tasksByPriority[priorityId] = [];
+          }
+          tasksByPriority[priorityId].push(this);
+      });
+
+      // Append tasks to table in priority order
+      var priorities = [4, 3, 2, 1];
+      priorities.forEach(function(priorityId) {
+          if (tasksByPriority[priorityId]) {
+              $('#group tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 10).append($('<span>').
+                  addClass('badge ' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
+              tasksByPriority[priorityId].forEach(function(row) {
+                  $('#group tbody').append(row);
+              });
+          }
+      });
+
+      function getPriorityName(priorityId) {
+        switch (priorityId) {
+          default:
+            return 'No Priority';
+          case 2:
+            return 'Low Priority';
+          case 3:
+            return 'Medium Priority';
+          case 4:
+            return 'High Priority';
         }
-      })
-      return false;
-}
+      }
 
-function edit(id){
-  $.get('/task_groups/{{ $taskGroup->id }}/tasks/' + id + '/edit' ,function(data){
-    $("#exampleModalLabel").html('Edit Task');
-    $("#page").html(data);
-    $("#exampleModal").modal('show');
-  });
-}
-
-function editMD(id){
-  $.get('/my_day/' + id + '/edit' ,function(data){
-    $("#exampleModalLabel").html('Edit Task');
-    $("#page").html(data);
-    $("#exampleModal").modal('show');
-  });
-}
-
-  $(document).ready(function() {
-    // Group tasks by priority
-    var tasksByPriority = {};
-    $('#group tbody tr').each(function() {
-        var priorityId = $(this).data('priority');
-        var task = $(this).get(0);
-        if (!tasksByPriority[priorityId]) {
-            tasksByPriority[priorityId] = [];
+      function getPriorityColor(priorityId) {
+        switch (priorityId) {
+          default:
+            return 'custom-none';
+          case 2:
+            return 'custom-primary';
+          case 3:
+            return 'custom-warning';
+          case 4:
+            return 'custom-danger';
         }
-        tasksByPriority[priorityId].push(this);
+      }
     });
 
-    // Append tasks to table in priority order
-    var priorities = [4, 3, 2, 1];
-    priorities.forEach(function(priorityId) {
-        if (tasksByPriority[priorityId]) {
-            $('#group tbody').append($('<tr>').addClass('priority-group').append($('<td>').attr('colspan', 10).append($('<span>').
-                addClass('badge ' + getPriorityColor(priorityId)).text(getPriorityName(priorityId)))));
-            tasksByPriority[priorityId].forEach(function(row) {
-                $('#group tbody').append(row);
-            });
-        }
-    });
-
-    function getPriorityName(priorityId) {
-      switch (priorityId) {
-        default:
-          return 'No Priority';
-        case 2:
-          return 'Low Priority';
-        case 3:
-          return 'Medium Priority';
-        case 4:
-          return 'High Priority';
-      }
-    }
-
-    function getPriorityColor(priorityId) {
-      switch (priorityId) {
-        default:
-          return 'custom-none';
-        case 2:
-          return 'custom-primary';
-        case 3:
-          return 'custom-warning';
-        case 4:
-          return 'custom-danger';
-      }
-    }
-  });
-
-</script>
+  </script>
 @endsection

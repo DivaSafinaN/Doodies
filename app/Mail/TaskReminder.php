@@ -47,8 +47,8 @@ class TaskReminder extends Mailable
         return new Content(
             markdown: 'mail.task-reminder',
             with: [
+                'user' => $this->task->user->name,
                 'name' => $this->task->name,
-                'from' => $this->task->taskGroup->name,
                 'due_date' => $this->task->reminder,
             ],
         );

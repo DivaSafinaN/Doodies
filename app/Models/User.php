@@ -16,8 +16,8 @@ class User extends Authenticatable
         return $this->hasMany(TaskGroup::class);
     }
 
-    public function myDay(){
-        return $this->hasMany(MyDay::class);
+    public function tasks(){
+        return $this->hasMany(Task::class);
     }
 
     /**

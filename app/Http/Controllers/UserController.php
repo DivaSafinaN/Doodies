@@ -17,7 +17,7 @@ class UserController extends Controller
     }
     public function enter(Request $request){
         $request->validate([
-            'email' => ['required'],
+            'email' => ['required','email:rfc,dns'],
             'password' => ['required']
         ]);
 
@@ -30,7 +30,7 @@ class UserController extends Controller
                 if (auth()->user()->is_admin) {
                     return redirect('/manage-user');
                 }else{
-                    return redirect('/my_day');
+                    return redirect('/tasks');
                 }
             };
         }
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function store(Request $request){
         $request->validate([
             'name' => ['required', 'string', 'min:3'],
-            'email' => ['required','unique:users'],
+            'email' => ['required','unique:users','email:rfc,dns'],
             'password' => ['required', 'min:8', 'confirmed']
         ]);
 
@@ -63,7 +63,7 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect('/my_day');
+        return redirect('/tasks');
     }
     public function edit_profile(){
         return view('user.edit-profile');
@@ -72,7 +72,7 @@ class UserController extends Controller
     public function update_profile(Request $request){
         $validatedData = $request->validate([
             'name' => ['string','min:3','required'],
-            'email' => ['string','required']
+            'email' => ['string','required','email:rfc,dns']
         ]);
 
         Auth::user()->update($validatedData);

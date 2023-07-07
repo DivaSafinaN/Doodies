@@ -21,17 +21,36 @@ class TaskAdditionals extends Controller
         return redirect()->back();
     }
 
+    public function store_inTG(Request $request){
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'notes' => 'nullable',
+            'due_date' => 'nullable|date',
+            'reminder' => 'nullable|date',
+            'task_group_id' => 'required|exists:task_groups,id', // validate task_group_id exists
+            'add_to_myday' => 'nullable|boolean',
+        ]);
+    
+        $validatedData['user_id'] = auth()->user()->id;
+        $validatedData['add_to_myday'] = false;
+    
+        $task = new Task($validatedData);
+        $task->task_group_id = $validatedData['task_group_id'];
+        // dd($task);
+        $task->save();
+    
+        return redirect()->back();
+    
+    }
+
     public function comtask(){
         $user_id = auth()->user()->id;
 
-        $myDayTasks = MyDay::where('completed', true)
+        $tasks = Task::where('completed', true)
                     ->where('user_id', $user_id)
                     ->get();
 
-        $taskGroups = TaskGroup::where('user_id', $user_id)
-                            ->get();
-
-        return view('additionals.completed', compact('myDayTasks','taskGroups'));
+        return view('additionals.completed', compact('tasks'));
     }
 
     public function addtomyday(TaskGroup $taskGroup, Task $task){
@@ -47,32 +66,47 @@ class TaskAdditionals extends Controller
     public function trash(){
         $user_id = auth()->user()->id;
 
-        $myDayTasks = MyDay::onlyTrashed()
+        $tasks = Task::onlyTrashed()
                     ->where('user_id', $user_id)
                     ->get();
 
-        $taskGroups = TaskGroup::with(['tasks' => function ($query) {
-            $query->withTrashed();
-        }])->where('user_id', $user_id)->get();
-
-        return view('additionals.trash', compact('myDayTasks','taskGroups'));
+        return view('additionals.trash', compact('tasks'));
     }
 
-    public function restore(TaskGroup $taskGroup, $id){
-        $task = $taskGroup->tasks()->withTrashed()->findOrFail($id);
+    public function addToTaskGroup(Request $request, Task $task){
+        $request->validate([
+            'task_group_id' => 'required|exists:task_groups,id',
+        ]);
+    
+        $task->task_group_id = $request->task_group_id;
+
+        $task->save();
+        return redirect()->back();
+    }
+
+    public function delFrTaskGroup(Task $task){
+        $task->task_group_id;
+        $task->task_group_id = null;
+
+        $task->save();
+        return redirect()->back();
+
+    }
+    public function restore(Task $tasks, $id){
+        $task = $tasks->withTrashed()->findOrFail($id);
         $task->restore();
         return redirect()->back();
     }
 
-    public function delete(TaskGroup $taskGroup, $id){
-        $task = $taskGroup->tasks()->withTrashed()->findOrFail($id);
+    public function delete(Task $tasks, $id){
+        $task = $tasks->withTrashed()->findOrFail($id);
         $task->forceDelete();
         return redirect()->back();
     }
 
     public function fileTgone(TaskGroup $taskGroup, Task $task)
     {
-        $filePath = public_path().'/file/'.$task->file;
+        $filePath = storage_path('app/public/file/' . $task->file);
         if (file_exists($filePath)) {
             unlink($filePath);
         }

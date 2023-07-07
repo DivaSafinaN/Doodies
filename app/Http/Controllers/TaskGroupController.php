@@ -10,26 +10,10 @@ use Illuminate\Http\Request;
 
 class TaskGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request, TaskGroup $taskGroup)
-    {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('task_groups.create');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +27,7 @@ class TaskGroupController extends Controller
 
     // Check if a task group with the same name already exists for the user
         if ($user->taskGroup()->where('name', $validatedData['name'])->exists()) {
-            return redirect()->back()->withErrors(['name' => 'A task group with that name already exists.']);
+            return redirect()->back()->withErrors(['TG_name' => 'A task group with that name already exists.']);
         }
         $validatedData['user_id'] = auth()->user()->id;
 
@@ -58,8 +42,11 @@ class TaskGroupController extends Controller
      */
     public function edit(TaskGroup $taskGroup, $sort=null)
     {
-        $myDay = MyDay::where('task_group_id', $taskGroup->id)->get();
-        return view('task_groups.edit', compact('taskGroup','myDay'));
+        $tGs = TaskGroup::where('user_id', auth()->user()->id)
+        ->where('id', '<>', $taskGroup->id)
+        ->orderBy($sort ?: 'name')
+        ->get();
+        return view('task_groups.edit', compact('tGs','taskGroup'));
     }
 
     /**
@@ -71,10 +58,20 @@ class TaskGroupController extends Controller
      */
     public function update(TaskGroupRequest $request, TaskGroup $taskGroup)
     {
+        // $taskGroup->update($request->validated());
+        // return redirect()->route('task_groups.edit',[
+        //     $taskGroup->id
+        // ]); 
+        
+        $existingTaskGroup = TaskGroup::where('name', $request->name)->where('id', '!=', $taskGroup->id)->first();
+        if ($existingTaskGroup) {
+            return redirect()->route('task_groups.edit', $taskGroup->id)->withErrors(['TG_name' => 'A task group with the same name already exists.']);
+        }
+    
         $taskGroup->update($request->validated());
-        return redirect()->route('task_groups.edit',[
-            $taskGroup->id
-        ]); 
+    
+        return redirect()->route('task_groups.edit', $taskGroup->id);
+
     }
 
     /**
@@ -86,7 +83,7 @@ class TaskGroupController extends Controller
     public function destroy(TaskGroup $taskGroup)
     {
         $taskGroup->forceDelete();
-        return redirect('my_day');
+        return redirect('/tasks');
     }
 
 }

@@ -12,20 +12,38 @@ class Task extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['task_group_id','priority_id','name', 'notes','due_date','file','completed','add_to_myday','reminder','deleted_at'];
+    protected $fillable = 
+    [
+        'user_id',
+        'task_group_id',
+        'priority_id',
+        'name',
+        'notes',
+        'due_date',
+        'file',
+        'completed',
+        'add_to_myday',
+        'reminder',
+        'start_date',
+        'end_date',
+        'deleted_at'
+    ];
 
     public function taskGroup()
     {
         return $this->belongsTo(TaskGroup::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
     public function priority(){
         return $this->hasOne(Priority::class);
     }
 
     public function sendReminderEmail()
     {
-        Mail::to($this->taskGroup->user->email)
+        Mail::to($this->user->email)
             ->send(new TaskReminder($this));
     }
 }

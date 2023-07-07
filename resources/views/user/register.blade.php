@@ -26,14 +26,14 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                                <input type="text" name="name" id="name" placeholder="Your Name" value="{{ old('name')}}"/>
                                 @error('name')
                                 <div style="color: #dc3545">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                                <input type="email" name="email" id="email" placeholder="Your Email" value="{{ old('email')}}"/>
                                 @error('email')
                                 <div style="color: #dc3545">{{ $message }}</div>
                                 @enderror

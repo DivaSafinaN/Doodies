@@ -36,8 +36,7 @@ class SendTaskReminder implements ShouldQueue
     {
         $now = now();
 
-        $tasks = Task::join('task_groups', 'task_groups.id', '=', 'tasks.task_group_id')
-            ->join('users', 'users.id', '=', 'task_groups.user_id')
+        $tasks = Task::join('users', 'users.id', '=', 'tasks.user_id')
             ->whereNotNull('tasks.reminder')
             ->where('tasks.reminder', '<=', $now)
             ->where('tasks.completed', false)
