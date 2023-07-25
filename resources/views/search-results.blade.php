@@ -65,7 +65,7 @@
                         </div>
                         </td>
                         <td style="width: 65%">
-                        <span>{{ $t->name }}</span> <br>
+                        <span>{{ $t->task_name }}</span> <br>
                         <span style="font-size: 12px">
                             @if ($t->taskGroup)
                                 <i><a href="{{ route('task_groups.edit', $t->taskGroup->id) }}" class="group-id">

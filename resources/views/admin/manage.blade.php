@@ -6,6 +6,7 @@
       <tr>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Phone Number</th>
         <th scope="col">Last Seen</th>
         <th scope="col">Status</th>
         <th></th>
@@ -16,6 +17,7 @@
       <tr>
         <td>{{ $u->name }}</td>
         <td>{{ $u->email }}</td>
+        <td>{{ $u->phone_number }}</td>
         <td>{{ $u->last_seen }}</td>
         <td>
             @if(Cache::has('user-is-online-' . $u->id))

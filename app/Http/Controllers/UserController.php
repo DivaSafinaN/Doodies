@@ -50,13 +50,15 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'min:3'],
             'email' => ['required','unique:users','email:rfc,dns'],
-            'password' => ['required', 'min:8', 'confirmed']
+            'password' => ['required', 'min:8', 'confirmed'],
+            'phone_number' => ['required','numeric','min:10']
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'phone_number' => $request->phone_number
         ]);
 
         // Avatar::create($request->name)->save(public_path().'/assets/image'.$user->id.'.png');
@@ -72,7 +74,8 @@ class UserController extends Controller
     public function update_profile(Request $request){
         $validatedData = $request->validate([
             'name' => ['string','min:3','required'],
-            'email' => ['string','required','email:rfc,dns']
+            'email' => ['string','required','email:rfc,dns'],
+            'phone_number' => ['required', 'numeric', 'min:10']
         ]);
 
         Auth::user()->update($validatedData);

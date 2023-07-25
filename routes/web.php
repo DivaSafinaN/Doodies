@@ -15,6 +15,7 @@ use App\Models\MyDay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,6 @@ Route::group(['middleware' => 'auth'], function(){
     Route::put('/update-profile',[UserController::class,'update_profile'])->name('update-profile');
     Route::get('/edit-password',[UserController::class,'edit_password'])->name('edit-password');
     Route::put('/update-password',[UserController::class,'update_password'])->name('update-password');
-
 
     Route::get('/calendar', [CalendarController::class,'index'])->name('calendar.index');
     Route::post('/calendar/store', [CalendarController::class,'store'])->name('calendar.store');

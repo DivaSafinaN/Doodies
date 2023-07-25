@@ -21,7 +21,8 @@ class AdminSeed extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('somesecretpassword'),
             'is_admin' => 1,
-            'last_seen' => NULL
+            'last_seen' => NULL,
+            'phone_number' => random_int(10,12)
         ]
         );
     }

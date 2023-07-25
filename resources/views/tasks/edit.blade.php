@@ -20,7 +20,7 @@
 <form action="{{ route('tasks.update', $task) }}" method="post" enctype="multipart/form-data">
     @method('PUT')
     @csrf
-<h5><input class="form-control" type="text" name="name" id="name" value="{{ $task->name }}" required autocomplete="name"></h5>
+<h5><input class="form-control" type="text" name="task_name" id="name" value="{{ $task->task_name }}" required autocomplete="name"></h5>
 <select class="form-select" style="width: auto" name="priority_id" id="priority_id">
   @foreach($priority as $p)
   <option value="{{ $p->id }}" {{ $task->priority_id == $p->id ? 'selected' : '' }}>

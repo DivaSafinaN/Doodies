@@ -79,7 +79,7 @@
                       </div>
                     </td>
                     <td style="width: 62%;">
-                      <span>{{ $ts->name }}</span> <br>
+                      <span>{{ $ts->task_name }}</span> <br>
                       @if ($ts->taskGroup)
                       <span style="font-size: 12px">
                         <i>
@@ -205,7 +205,7 @@
         <form action="{{ route('tasks.store') }}" method="post" class="row g-3">
           @csrf
           <div class="col">
-          <input type="text" class="form-control input" placeholder="ex: Homework" name="name" required autocomplete="name">
+          <input type="text" class="form-control input" placeholder="ex: Homework" name="task_name" required autocomplete="task_name">
           </div>
           <div class="col-auto">
           <button type="submit" class="btn btn-dark">Add Task</button>

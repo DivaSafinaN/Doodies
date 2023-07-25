@@ -23,7 +23,7 @@ class TaskAdditionals extends Controller
 
     public function store_inTG(Request $request){
         $validatedData = $request->validate([
-            'name' => 'required',
+            'task_name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'reminder' => 'nullable|date',

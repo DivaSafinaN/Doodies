@@ -87,7 +87,7 @@
                           @endif
                         </td>
                         <td style="width: 68%;">
-                          <span class="text-muted">{{ $ct->name }}</span>
+                          <span class="text-muted">{{ $ct->task_name }}</span>
                         </td>
                         <td style="width: 5%; text-align: center;">
                           <div class="dropdown">

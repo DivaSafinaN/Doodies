@@ -13,14 +13,7 @@ class SearchController extends Controller
     {
         $q = $request->input('q');
         
-        // $tasks = Task::with('taskGroup')
-        // ->where('name', 'like', '%'.$q.'%')
-        // ->where('completed', false)
-        // ->whereHas('taskGroup', function ($q) {
-        //     $q->where('user_id', Auth::id());
-        // })
-        // ->get();
-        $tasks = Task::where('name', 'like', '%'.$q.'%')
+        $tasks = Task::where('task_name', 'like', '%'.$q.'%')
         ->where('user_id', Auth::id())
         ->where('completed', false)
         ->get();

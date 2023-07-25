@@ -24,7 +24,7 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'task_name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'priority_id' => 'required',

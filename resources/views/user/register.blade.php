@@ -39,6 +39,13 @@
                                 @enderror
                             </div>
                             <div class="form-group">
+                                <label for="phone_number"><i class="zmdi zmdi-phone"></i></label>
+                                <input type="text" name="phone_number" id="phone_number" placeholder="Your Phone Number" value="{{ old('phone_number')}}"/>
+                                @error('phone_number')
+                                <div style="color: #dc3545">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="password" id="pass" placeholder="Password"/>
                                 @error('password')

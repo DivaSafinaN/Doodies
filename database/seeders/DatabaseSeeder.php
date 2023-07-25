@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(PrioritySeed::class);
         $this->call(AdminSeed::class);
+        $this->call(AccSeed::class);
     }
 }

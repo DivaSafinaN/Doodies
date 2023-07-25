@@ -32,7 +32,7 @@
                           </form>
                         </td>
                         <td style="width: 68%;">
-                          <span class="text-muted">{{ $ct->name }}</span>
+                          <span class="text-muted">{{ $ct->task_name }}</span>
                         </td>
                         <td style="text-align: end; width: 30px">
                           @if($ct->notes)

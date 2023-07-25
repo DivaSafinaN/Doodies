@@ -41,7 +41,7 @@ class TaskController extends Controller
     public function store(Request $request, TaskGroup $taskGroup)
     {
         $validatedData = $request->validate([
-            'name' => 'required',
+            'task_name' => 'required',
             'notes' => 'nullable',
             'due_date' => 'nullable|date',
             'reminder' =>'nullable|date'

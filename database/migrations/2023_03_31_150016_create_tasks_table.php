@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('priority_id')->default(1);
             $table->unsignedBigInteger('task_group_id')->nullable();
-            $table->string('name');
+            $table->string('task_name');
             $table->text('notes')->nullable();
             $table->text('due_date')->nullable();
             $table->string('file')->nullable();
