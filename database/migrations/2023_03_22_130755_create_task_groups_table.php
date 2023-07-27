@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('task_groups', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('taskgroup_name');
+            $table->string('name');
             $table->timestamps();
             $table->softDeletes();
         });

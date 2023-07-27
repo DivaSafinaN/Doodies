@@ -12,7 +12,4 @@ class Priority extends Model
     public function tasks(){
         return $this->belongsTo(Task::class);
     }
-    public function myDay(){
-        return $this->belongsTo(MyDay::class);
-    }
 }
