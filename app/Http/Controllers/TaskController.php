@@ -8,9 +8,12 @@ use App\Models\Task;
 use App\Models\TaskGroup;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use App\Traits\WablasTrait;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
+    use WablasTrait;
     /**
      * Display a listing of the resource.
      *
@@ -102,5 +105,22 @@ class TaskController extends Controller
         return redirect()->back();
 
     }
+    public function sendReminderWhatsApp(Task $task)
+    {
+        $recipientName = $task->user->name;
+        $taskName = $task->task_name;
+        $due_date = $task->due_date;
+        $reminderDate = $task->reminder;
 
+        if (!$due_date) {
+            $due_date = Carbon::parse($reminderDate)->format('Y-m-d');
+        } else {
+            $due_date = Carbon::parse($due_date)->format('Y-m-d');
+        }
+
+        $message = "*Task Reminder* \n\nDear {$recipientName},\n\nYou have a task that is due soon:\n\nTask Name: {$taskName}\nDue Date: {$due_date}\n\nThank you for using Doodies.\nDoodies Team.";
+        $phone = $task->user->phone_number;
+
+        $this->sendText([['phone' => $phone, 'message' => $message]]);
+    }
 }

@@ -51,22 +51,5 @@ class Task extends Model
             ->send(new TaskReminder($this));
     }
 
-    public function sendReminderWhatsApp()
-    {
-        $recipientName = $this->user->name;
-        $taskName = $this->task_name;
-        $due_date = $this->due_date;
-        $reminderDate = $this->reminder;
-
-        if (!$due_date) {
-            $due_date = Carbon::parse($reminderDate)->format('Y-m-d');
-        } else {
-            $due_date = Carbon::parse($due_date)->format('Y-m-d');
-        }
-
-        $message = "*Task Reminder* \n\nDear {$recipientName},\n\nYou have a task that is due soon:\n\nTask Name: {$taskName}\nDue Date: {$due_date}\n\nThank you for using Doodies.\nDoodies Team.";
-        $phone = $this->user->phone_number;
-
-        $this->sendText([['phone' => $phone, 'message' => $message]]);
-    }
+    
 }

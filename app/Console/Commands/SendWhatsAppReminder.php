@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\TaskController;
 use App\Models\Task;
 use Illuminate\Console\Command;
+use Illuminate\Container\Container;
 
 class SendWhatsAppReminder extends Command
 {
@@ -29,6 +31,7 @@ class SendWhatsAppReminder extends Command
     public function handle()
     {
         $now = now();
+        $taskController = new TaskController();
 
         $tasks = Task::join('users', 'users.id', '=', 'tasks.user_id')
             ->whereNotNull('tasks.reminder')
@@ -38,7 +41,7 @@ class SendWhatsAppReminder extends Command
             ->get(['tasks.*']);
 
         foreach ($tasks as $task) {
-            $task->sendReminderWhatsApp(); 
+            $taskController->sendReminderWhatsApp($task); 
             $task->update(['reminder' => NULL]);
         }
     }
