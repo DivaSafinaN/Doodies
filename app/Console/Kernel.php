@@ -18,8 +18,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->job(new SendTaskReminder)->everyMinute();
-        $schedule->command('send:whatsappReminder')->everyMinute();
+        $schedule->job(new SendTaskReminder)->everyMinute();
+        // $schedule->command('send:whatsappReminder')->everyMinute();
         $schedule->command('trash:deleteTasks')->daily();
     }
 
