@@ -48,7 +48,7 @@ class TaskReminder extends Mailable
             markdown: 'mail.task-reminder',
             with: [
                 'user' => $this->task->user->name,
-                'name' => $this->task->name,
+                'name' => $this->task->task_name,
                 'due_date' => $this->task->reminder,
             ],
         );
